@@ -31,7 +31,7 @@ public class MainGUI {
 	 */
 	public MainGUI() {
 		initialize();
-		//ssssii
+		
 	}
 
 	/**
