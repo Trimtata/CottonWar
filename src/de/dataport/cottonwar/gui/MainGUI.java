@@ -42,7 +42,7 @@ public class MainGUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblWursti = new JLabel("Wursti");
-		frame.getContentPane().add(lblWursti, BorderLayout.CENTER);
+		frame.getContentPane().add(lblWursti, BorderLayout.CENTER); 
 	}
 
 }
