@@ -38,9 +38,9 @@ public class World extends JPanel implements ActionListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static JPanel panel;
+	public  JPanel panel;
 	GameObject a = new GameObject();
-
+	List<GameObject> yolo = new ArrayList<GameObject>();
 	/**
 	 * Launch the application.
 	 */
@@ -53,39 +53,33 @@ public class World extends JPanel implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				a.x = a.x +1;
-				repaint();
+				Graphics g = panel.getGraphics();
+				g.setColor(panel.getBackground());
+				g.fillRect(0, 0, panel.getWidth(), panel.getHeight());
+				create();
 			}
 		});
 		timer.start();
 		
 		}
 
-	@Override
-	protected void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
-		super.paintComponent(g);
-		g.drawImage(a.i, a.x, a.y, 200, 300, null);
-	}
+//	@Override
+//	protected void paintComponent(Graphics g) {
+//		// TODO Auto-generated method stub
+//		super.paintComponent(g);
+//		g.drawImage(a.i, a.x, a.y, 200, 300, null);
+//	}
 
-	public World(JFrame eigentümer) {
-		List<GameObject> yolo = new ArrayList<GameObject>();
-		yolo.add(a);
+	public World(JPanel eigentümer) {
 		
-		panel = new JPanel();
-		panel.setLayout(null);
-		panel.setVisible(true);
+		panel = eigentümer;
+//		panel = new JPanel();
+//		panel.setVisible(true);
+//		panel.setLayout(null);
 		
-		JButton j = new JButton("Sch");
-		j.setBounds(10, 10, 50, 50);
-		//j.addActionListener(this);
-		j.setVisible(true);
-		panel.add(j);
 		
-
 		
-
 		
-	
 //		this.ausführen();
 
 	}
@@ -103,5 +97,11 @@ public class World extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.ausführen();
+	}
+	
+	public void create(){
+
+		Graphics g = this.getGraphics();
+		g.drawImage(a.i, a.x, a.y, 200, 300, null);
 	}
 }

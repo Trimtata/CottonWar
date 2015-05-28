@@ -17,10 +17,14 @@ public class GameObject {
 	int x = 100;
 	int y = 100;
 
+	public Image getImage() {
+		return i;
+	}
+	
 	public GameObject() {
 
 		try {
-			i = ImageIO.read(new File("Penguins.jpg"));
+			i = ImageIO.read(new File("url.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
