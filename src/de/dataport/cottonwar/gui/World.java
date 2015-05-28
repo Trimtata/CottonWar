@@ -20,34 +20,63 @@ import de.dataport.cottonwar.objekte.Schlaeger;
 
 import javax.swing.JButton;
 
-import java.awt.event.MouseAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
-public class World {
+public class World extends JPanel implements KeyListener{
 
-	JPanel panel;
+	public static JPanel panel;
 	public JFrame frame;
-
+	GameObject a = new GameObject();
+	private final Action action = new SwingAction();
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					World window = new World();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		
+		a.paintPlayer(g);
 	}
+	
+	
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					World window = new World();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 
 	public World() {
-		initialize();
+		//initialize();
+		this.addKeyListener(this);
+		this.setFocusable(true);
+		setLayout(null);
+		
+		JButton btnSch = new JButton("Sch");
+		btnSch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnSch.setAction(action);
+		btnSch.setBounds(10, 11, 45, 23);
+		add(btnSch);
+		
+		
 
 	}
 
@@ -63,6 +92,8 @@ public class World {
 		panel = new JPanel();
 		panel.setBounds(0, 0, 800, 1200);
 		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
 		/*
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -91,4 +122,56 @@ public class World {
 		
 	}
 
+
+//	@Override
+//	public void keyPressed(KeyEvent arg0) {
+//		// TODO Auto-generated method stub
+//		
+//		if(arg0.getKeyCode()==KeyEvent.VK_UP){
+//			a.move(0, -5);
+//			this.repaint();
+//		}
+//		if(arg0.getKeyCode()==KeyEvent.VK_DOWN){
+//			a.move(0, 5);
+//			this.repaint();
+//		}
+//		if(arg0.getKeyCode()==KeyEvent.VK_LEFT){
+//			a.move(-5, 0);
+//			this.repaint();
+//		}
+//		if(arg0.getKeyCode()==KeyEvent.VK_RIGHT){
+//			a.move(5, 0);
+//			this.repaint();
+//		}
+//		
+//	}
+
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "SwingAction");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
+	}
 }

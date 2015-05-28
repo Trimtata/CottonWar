@@ -6,6 +6,10 @@ import de.dataport.cottonwar.gui.World;
 
 public class Schlaeger extends Einheit {
 
+	public int getX() {
+		return x;
+	}
+	
 	
 	public Schlaeger(String name, int lp, int ap, int spd, int range, int gold, int ep, int cost, int id, int x, int y, int height,
 			int width) {
@@ -13,10 +17,13 @@ public class Schlaeger extends Einheit {
 		// TODO Auto-generated constructor stub
 	}
 
+	// Graphics methode
+	
 	public static void main(String[] args) {
 		
 
 	}
 
+	
 	
 }
