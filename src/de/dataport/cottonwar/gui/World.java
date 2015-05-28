@@ -25,153 +25,83 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.Timer;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
-public class World extends JPanel implements KeyListener{
-
+public class World extends JPanel implements ActionListener{
+ 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static JPanel panel;
-	public JFrame frame;
 	GameObject a = new GameObject();
-	private final Action action = new SwingAction();
 
 	/**
 	 * Launch the application.
 	 */
-	
-	public void paintComponent(Graphics g){
-		super.paintComponent(g);
-		
-		a.paintPlayer(g);
-	}
-	
-	
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					World window = new World();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
-
-	public World() {
-		//initialize();
-		this.addKeyListener(this);
-		this.setFocusable(true);
-		setLayout(null);
+	public void ausführen() {
 		
-		JButton btnSch = new JButton("Sch");
-		btnSch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		btnSch.setAction(action);
-		btnSch.setBounds(10, 11, 45, 23);
-		add(btnSch);
-		
-		
-
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-
-		panel = new JPanel();
-		panel.setBounds(0, 0, 800, 1200);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		/*
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		Timer timer = new Timer(10, new ActionListener() {
+			
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				
-				Graphics g = panel.getGraphics();
-				g.setColor(Color.BLACK);
-				Schlaeger schlaeger = new Schlaeger("schlaeger", 10000, 1, 1, 1, 0, 0, 13, true);
-				schlaeger.setX(0);
-				schlaeger.setY(20);
-				schlaeger.setHeight(20);
-				schlaeger.setWidth(20);
-				g.fillRect(schlaeger.getX(), schlaeger.getY(), schlaeger.getWidth(), schlaeger.getHeight());
-				
-				schlaeger.move();
-				
-				
-				
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				a.x = a.x +1;
+				repaint();
 			}
 		});
-		panel.add(btnNewButton);
-		*/
-
-
+		timer.start();
 		
-	}
-
-
-//	@Override
-//	public void keyPressed(KeyEvent arg0) {
-//		// TODO Auto-generated method stub
-//		
-//		if(arg0.getKeyCode()==KeyEvent.VK_UP){
-//			a.move(0, -5);
-//			this.repaint();
-//		}
-//		if(arg0.getKeyCode()==KeyEvent.VK_DOWN){
-//			a.move(0, 5);
-//			this.repaint();
-//		}
-//		if(arg0.getKeyCode()==KeyEvent.VK_LEFT){
-//			a.move(-5, 0);
-//			this.repaint();
-//		}
-//		if(arg0.getKeyCode()==KeyEvent.VK_RIGHT){
-//			a.move(5, 0);
-//			this.repaint();
-//		}
-//		
-//	}
-
+		}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
+	protected void paintComponent(Graphics g) {
 		// TODO Auto-generated method stub
-		
+		super.paintComponent(g);
+		g.drawImage(a.i, a.x, a.y, 200, 300, null);
 	}
 
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+	public World(JFrame eigentümer) {
+		List<GameObject> yolo = new ArrayList<GameObject>();
+		yolo.add(a);
 		
+		panel = new JPanel();
+		panel.setLayout(null);
+		panel.setVisible(true);
+		
+		JButton j = new JButton("Sch");
+		j.setBounds(10, 10, 50, 50);
+		//j.addActionListener(this);
+		j.setVisible(true);
+		panel.add(j);
+		
+
+		
+
+		
+	
+//		this.ausführen();
+
 	}
 
-
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {
 			putValue(NAME, "SwingAction");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
+
 		public void actionPerformed(ActionEvent e) {
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		this.ausführen();
 	}
 }
