@@ -16,14 +16,6 @@ public class Schlaeger extends Einheit {
 		super(name, lp, ap, spd, range, gold, ep, cost, id, x, y, height, width);
 		// TODO Auto-generated constructor stub
 	}
-
-	// Graphics methode
-	
-	public static void main(String[] args) {
-		
-
-	}
-
 	
 	
 }

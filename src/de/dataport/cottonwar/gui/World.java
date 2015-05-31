@@ -33,54 +33,13 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 public class World extends JPanel implements ActionListener{
- 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	public  JPanel panel;
 	GameObject a = new GameObject();
-	List<GameObject> yolo = new ArrayList<GameObject>();
-	/**
-	 * Launch the application.
-	 */
+	
 
-	public void ausführen() {
-		
-		Timer timer = new Timer(10, new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				a.x = a.x +1;
-				Graphics g = panel.getGraphics();
-				g.setColor(panel.getBackground());
-				g.fillRect(0, 0, panel.getWidth(), panel.getHeight());
-				create();
-			}
-		});
-		timer.start();
-		
-		}
-
-//	@Override
-//	protected void paintComponent(Graphics g) {
-//		// TODO Auto-generated method stub
-//		super.paintComponent(g);
-//		g.drawImage(a.i, a.x, a.y, 200, 300, null);
-//	}
-
-	public World(JPanel eigentümer) {
-		
-		panel = eigentümer;
-//		panel = new JPanel();
-//		panel.setVisible(true);
-//		panel.setLayout(null);
-		
-		
-		
-		
-//		this.ausführen();
+	public World() {
 
 	}
 
@@ -96,8 +55,9 @@ public class World extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.ausführen();
+
 	}
+
 	
 	public void create(){
 

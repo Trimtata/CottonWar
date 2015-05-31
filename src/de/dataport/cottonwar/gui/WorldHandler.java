@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 
 import javax.swing.Box;
 
@@ -44,25 +45,66 @@ public class WorldHandler extends JFrame {
 		panelSpielfeld.setBounds(10, 87, 764, 464);
 
 		
-		w = new World(panelSpielfeld);
+		w = new World();
 		worldhander.setContentPane(w);
 		getContentPane().setLayout(null);
 		w.setLayout(null);
 		w.add(panelSpielfeld);
 		
-		JButton j = new JButton("Swag");
+		
+		JButton j = new JButton("Schläger");
+		JButton k = new JButton("Schütze");
+		JButton l = new JButton("Panzer");
+		final JButton josef = new JButton("Spiel starten");
+		
+		
 		j.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Einheit e=new Einheit("herbert", 0, 0, 0, 0, 0, 0, 0, 0, 20, 80,100,100);
+				Einheit e=new Einheit("herbert", 0, 0, 0, 0, 0, 0, 0, 0, 10, 220,100,100);
+				Einheit.einheiten.add(e);
 				e.setSpielfeld(panelSpielfeld);
 				e.ausführen();
 			}
 		});
-		j.setBounds(10, 11, 89, 23);
+		k.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Einheit e=new Einheit("herbert", 0, 0, 0, 0, 0, 0, 0, 0, 10, 220,100,100);
+				Einheit.einheiten.add(e);
+				e.setSpielfeld(panelSpielfeld);
+				e.ausführen();
+			}
+		});
+		l.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Einheit e=new Einheit("herbert", 0, 0, 0, 0, 0, 0, 0, 0, 10, 220,100,100);
+				Einheit.einheiten.add(e);
+				e.setSpielfeld(panelSpielfeld);
+				e.ausführen();
+			}
+		});
+		josef.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Einheit e =new Einheit("herbert", 0, 0, 0, 0, 0, 0, 0, 0, 10, 220,100,100);
+				e.setSpielfeld(panelSpielfeld);
+				josef.setVisible(false);
+				e.zeichnen();
+			}
+		});
+		
+		j.setBounds(10, 10, 80, 20);
+		k.setBounds(95, 10, 80, 20);
+		l.setBounds(180, 10, 80, 20);
+		josef.setBounds(340, 40, 110, 20);
 		
 				
 		w.add(j);
+		w.add(k);
+		w.add(l);
+		w.add(josef);
 		
 		
 	}
@@ -75,4 +117,5 @@ public class WorldHandler extends JFrame {
 			
 		}
 	}
+
 }

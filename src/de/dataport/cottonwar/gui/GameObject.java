@@ -24,7 +24,7 @@ public class GameObject {
 	public GameObject() {
 
 		try {
-			i = ImageIO.read(new File("url.jpg"));
+			i = ImageIO.read(new File("ant.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -39,6 +39,10 @@ public class GameObject {
 
 		this.x = this.x + dX;
 
+	}
+	
+	public void moveB (int dX) {
+		this.x = this.x - dX;
 	}
 
 

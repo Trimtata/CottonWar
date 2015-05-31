@@ -3,15 +3,19 @@ package de.dataport.cottonwar.objekte;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import de.dataport.cottonwar.datastructures.Gameobject;
-import de.dataport.cottonwar.gui.GameObject;
+import de.dataport.cottonwar.gui.*;
 
 public class Einheit {
 
+	public static List<Einheit> einheiten = new ArrayList<Einheit>();
+	
 	public int getX() {
 		return x;
 	}
@@ -76,15 +80,13 @@ public class Einheit {
 
 	public void ausführen() {
 
-		Timer timer = new Timer(10, new ActionListener() {
+		Timer timer = new Timer(100, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				x = x + 1;
-				Graphics g = spielfeld.getGraphics();
-				g.setColor(spielfeld.getBackground());
-				g.fillRect(0, 0, spielfeld.getWidth(), spielfeld.getHeight());// ------
+						
 				create();
 			}
 		});
@@ -92,11 +94,33 @@ public class Einheit {
 
 
 	}
+	
+	public void zeichnen() {
+		
+		Timer timer = new Timer(100, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Graphics g = spielfeld.getGraphics();
+				g.setColor(spielfeld.getBackground());				
+				g.fillRect(0, 0, spielfeld.getWidth(), spielfeld.getHeight());	
+				machnix();
+			}
+			
+		});
+		timer.start();
+		
+		}
+	
+	public void machnix() {
+		
+	}
+	
 
 	public void create(){
 
 		Graphics g = spielfeld.getGraphics();
 		GameObject a = new GameObject();
-		g.drawImage(a.getImage(), x, y, 200, 300, null);
+		g.drawImage(a.getImage(), x, y, 128, 128, null);
 	}
 }
