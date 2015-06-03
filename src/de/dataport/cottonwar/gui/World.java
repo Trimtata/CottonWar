@@ -16,7 +16,6 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
 import de.dataport.cottonwar.objekte.Einheit;
-import de.dataport.cottonwar.objekte.Schlaeger;
 
 import javax.swing.JButton;
 

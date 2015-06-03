@@ -12,7 +12,6 @@ import javax.swing.JButton;
 
 import de.dataport.cottonwar.gui.World;
 import de.dataport.cottonwar.gui.WorldHandler;
-import de.dataport.cottonwar.objekte.Schlaeger;
 
 public class Main {
 

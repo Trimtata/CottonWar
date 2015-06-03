@@ -51,12 +51,11 @@ public class Einheit {
 	String name;
 	int lp, ap, spd, range, gold, ep, cost, id, x, y, height, width;
 
-	public Einheit(String name, int lp, int ap, int spd, int range, int gold, int ep, int cost, int id, int x, int y, int height, int width) {
+	public Einheit(String name, int lp, int ap, int range, int gold, int ep, int cost, int id, int x, int y, int height, int width) {
 		super();
 		this.name = name;
 		this.lp = lp;
 		this.ap = ap;
-		this.spd = spd;
 		this.range = range;
 		this.gold = gold;
 		this.ep = ep;
@@ -68,9 +67,9 @@ public class Einheit {
 		this.width = width;
 	}
 
-	JPanel spielfeld;
+	 static JPanel spielfeld;
 	
-	public JPanel getSpielfeld() {
+	public static JPanel getSpielfeld() {
 		return spielfeld;
 	}
 
@@ -78,9 +77,30 @@ public class Einheit {
 		this.spielfeld = spielfeld;
 	}
 
-	public void ausführen() {
+	
+	public void ausführen2() {
 
 		Timer timer = new Timer(100, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				x = x - 1;
+						
+				create();
+			}
+		});
+		timer.start();
+
+
+	}
+	
+	
+	
+	public void ausführen() {
+
+		if (id == 0) {
+			Timer timer = new Timer(10, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -91,13 +111,34 @@ public class Einheit {
 			}
 		});
 		timer.start();
+		} else {
+			
+			Timer timer2 = new Timer(10, new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					x = x - 1;
+							
+					create();
+				}
+			});
+			timer2.start();
+
+			
+			
+		}
+		
+		
+		
+		
 
 
 	}
 	
 	public void zeichnen() {
 		
-		Timer timer = new Timer(100, new ActionListener() {
+		Timer timer = new Timer(10, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {

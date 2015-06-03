@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 public class GameObject {
 
 	Image i = null;
+	static Image h = null;
 	int x = 100;
 	int y = 100;
 
@@ -25,6 +26,7 @@ public class GameObject {
 
 		try {
 			i = ImageIO.read(new File("ant.png"));
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
