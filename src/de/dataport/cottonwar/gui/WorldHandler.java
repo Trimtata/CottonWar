@@ -78,7 +78,7 @@ public class WorldHandler extends JFrame {
 		m.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Einheit e=new Einheit("Ritter", 200, 12, 10, 20, 0, 15, 1, 890, 220,100,100, 10);
+				Einheit e=new Einheit("Ritter", 200, 12, 10, 20, 0, 15, 1, 890, 220,100,100, 15);
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
 				e.ausführen();
@@ -105,7 +105,7 @@ public class WorldHandler extends JFrame {
 		k.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Einheit e=new Einheit("Ritter", 200, 12, 10, 20, 0, 15, 0, 10, 220,100,100, 10);
+				Einheit e=new Einheit("Ritter", 200, 12, 10, 20, 0, 15, 0, 10, 220,100,100, 15);
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
 				e.ausführen();
@@ -120,20 +120,11 @@ public class WorldHandler extends JFrame {
 				e.ausführen();
 			}
 		});
-		josef.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				Einheit e =new Einheit("herbert", 0, 0, 0, 0, 0, 0, 0, 10, 220,100,100, 10);
-				e.setSpielfeld(spielfeld);
-				josef.setVisible(false);
-				e.zeichnen();
-			}
-		});
+
 		
 		j.setBounds(10, 10, 80, 20);
 		k.setBounds(95, 10, 80, 20);
 		l.setBounds(180, 10, 80, 20);
-		josef.setBounds(500, 40, 110, 20);
 		o.setBounds(1090, 10, 80, 20);
 		m.setBounds(1000, 10, 80, 20);
 		n.setBounds(910, 10, 80, 20);

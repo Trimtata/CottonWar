@@ -50,7 +50,8 @@ public class Einheit implements Runnable {
 	}
 
 	String name;
-	int lp, ap, spd, range, gold, ep, cost, id, x, y, height, width, speed = 10;
+	int lp, ap, spd, range, gold, ep, cost, id, x, y, height, width,
+			speed = 10;
 	Timer timer;
 	Timer timer2;
 
@@ -108,15 +109,11 @@ public class Einheit implements Runnable {
 				Graphics g = spielfeld.getGraphics();
 				g.setColor(spielfeld.getBackground());
 				g.fillRect(0, 0, spielfeld.getWidth(), spielfeld.getHeight());
-				machnix();
+
 			}
 
 		});
 		timer.start();
-
-	}
-
-	public void machnix() {
 
 	}
 
@@ -125,19 +122,28 @@ public class Einheit implements Runnable {
 		List<Einheit> enemies = einheiten2;
 		if (id == 0)
 			enemies = einheiten;
-
-		Rectangle me = new Rectangle(x, y, 10, 10);
+		
+		Rectangle me = new Rectangle(x - 64, y, 64, 10);//breite der Figuren mit Parameter übergeben
+		
 		for (Einheit e : enemies) {
-			Rectangle enemy = new Rectangle(e.x, e.y, 10, 10);
+			Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
 
 			if (me.intersects(enemy)) {
-				//einheiten.remove(me);
-				//einheiten2.remove(enemy);
+				einheiten.remove(me);
+				einheiten2.remove(enemy);
 				System.out.println("Attacke");
 				return true;
 			}
 		}
 		return false;
 	}
+
+	 public int attacke(){
+	
+	 if(kollisionstest() == true){
+	
+		 e.lp = e.lp - .ap * Math.random();
+	 }
+	 }
 
 }
