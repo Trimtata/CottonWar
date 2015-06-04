@@ -1,6 +1,7 @@
 package de.dataport.cottonwar.objekte;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -9,13 +10,13 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import de.dataport.cottonwar.datastructures.Gameobject;
-import de.dataport.cottonwar.gui.*;
+import de.dataport.cottonwar.gui.WorldHandler;
 
-public class Einheit {
+public class Einheit implements Runnable {
 
 	public static List<Einheit> einheiten = new ArrayList<Einheit>();
-	
+	public static List<Einheit> einheiten2 = new ArrayList<Einheit>();
+
 	public int getX() {
 		return x;
 	}
@@ -49,9 +50,12 @@ public class Einheit {
 	}
 
 	String name;
-	int lp, ap, spd, range, gold, ep, cost, id, x, y, height, width;
+	int lp, ap, spd, range, gold, ep, cost, id, x, y, height, width, speed = 10;
+	Timer timer;
+	Timer timer2;
 
-	public Einheit(String name, int lp, int ap, int range, int gold, int ep, int cost, int id, int x, int y, int height, int width) {
+	public Einheit(String name, int lp, int ap, int range, int gold, int ep,
+			int cost, int id, int x, int y, int height, int width, int speed) {
 		super();
 		this.name = name;
 		this.lp = lp;
@@ -65,10 +69,11 @@ public class Einheit {
 		this.y = y;
 		this.height = height;
 		this.width = width;
+		this.speed = speed;
 	}
 
-	 static JPanel spielfeld;
-	
+	static JPanel spielfeld;
+
 	public static JPanel getSpielfeld() {
 		return spielfeld;
 	}
@@ -77,91 +82,62 @@ public class Einheit {
 		this.spielfeld = spielfeld;
 	}
 
-	
-	public void ausführen2() {
-
-		Timer timer = new Timer(100, new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				x = x - 1;
-						
-				create();
+	@Override
+	public void run() {
+		boolean stop = false;
+		while (!stop) {
+			x = x + (id == 0 ? 1 : -1);
+			stop = kollisionstest();
+			try {
+				Thread.sleep(speed);
+			} catch (InterruptedException e) {
 			}
-		});
-		timer.start();
-
-
-	}
-	
-	
-	
-	public void ausführen() {
-
-		if (id == 0) {
-			Timer timer = new Timer(10, new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				x = x + 1;
-						
-				create();
-			}
-		});
-		timer.start();
-		} else {
-			
-			Timer timer2 = new Timer(10, new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					x = x - 1;
-							
-					create();
-				}
-			});
-			timer2.start();
-
-			
-			
 		}
-		
-		
-		
-		
-
-
 	}
-	
+
+	public void ausführen() {
+		WorldHandler.executor.execute(this);
+	}
+
 	public void zeichnen() {
-		
+
 		Timer timer = new Timer(10, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Graphics g = spielfeld.getGraphics();
-				g.setColor(spielfeld.getBackground());				
-				g.fillRect(0, 0, spielfeld.getWidth(), spielfeld.getHeight());	
+				g.setColor(spielfeld.getBackground());
+				g.fillRect(0, 0, spielfeld.getWidth(), spielfeld.getHeight());
 				machnix();
 			}
-			
+
 		});
 		timer.start();
-		
-		}
-	
+
+	}
+
 	public void machnix() {
-		
-	}
-	
 
-	public void create(){
-
-		Graphics g = spielfeld.getGraphics();
-		GameObject a = new GameObject();
-		g.drawImage(a.getImage(), x, y, 128, 128, null);
 	}
+
+	public boolean kollisionstest() {
+
+		List<Einheit> enemies = einheiten2;
+		if (id == 0)
+			enemies = einheiten;
+
+		Rectangle me = new Rectangle(x, y, 10, 10);
+		for (Einheit e : enemies) {
+			Rectangle enemy = new Rectangle(e.x, e.y, 10, 10);
+
+			if (me.intersects(enemy)) {
+				//einheiten.remove(me);
+				//einheiten2.remove(enemy);
+				System.out.println("Attacke");
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
