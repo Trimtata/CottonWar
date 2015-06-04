@@ -2,6 +2,7 @@ package de.dataport.cottonwar.gui;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -23,27 +24,27 @@ import javax.swing.Action;
 
 import de.dataport.cottonwar.objekte.Einheit;
 
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferStrategy;
 
 public class WorldHandler extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8853228346248816103L;
 	World w;
 	JPanel panelSpielfeld;
 	public WorldHandler() {
+			
+		
 		JFrame worldhander = new JFrame();
 		worldhander.setSize(1200, 700);
 		worldhander.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		worldhander.setVisible(true);
 		
+		
 
 		panelSpielfeld = new JPanel();
 		panelSpielfeld.setBounds(10	, 200, 1590, 870);
-
 		
 		w = new World();
 		worldhander.setContentPane(w);
@@ -140,9 +141,9 @@ public class WorldHandler extends JFrame {
 		w.add(o);
 		w.add(m);
 		w.add(n);
-		
-		
-	}
+		}
+	
+	
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {
 			putValue(NAME, "SwingAction");

@@ -16,6 +16,8 @@ public class Einheit {
 
 	public static List<Einheit> einheiten = new ArrayList<Einheit>();
 	
+	GameObject gameObject = new GameObject();
+	
 	public int getX() {
 		return x;
 	}
@@ -53,6 +55,8 @@ public class Einheit {
 
 	public Einheit(String name, int lp, int ap, int range, int gold, int ep, int cost, int id, int x, int y, int height, int width) {
 		super();
+		
+		System.out.println("NEUE INSTANZ");
 		this.name = name;
 		this.lp = lp;
 		this.ap = ap;
@@ -76,24 +80,6 @@ public class Einheit {
 	public void setSpielfeld(JPanel spielfeld) {
 		this.spielfeld = spielfeld;
 	}
-
-	
-	public void ausführen2() {
-
-		Timer timer = new Timer(100, new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				x = x - 1;
-						
-				create();
-			}
-		});
-		timer.start();
-
-
-	}
 	
 	
 	
@@ -106,8 +92,11 @@ public class Einheit {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				x = x + 1;
+				
+				
 						
 				create();
+				
 			}
 		});
 		timer.start();
@@ -131,21 +120,19 @@ public class Einheit {
 		
 		
 		
-		
-
-
 	}
+	
+	
 	
 	public void zeichnen() {
 		
-		Timer timer = new Timer(10, new ActionListener() {
+		Timer timer = new Timer(60, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Graphics g = spielfeld.getGraphics();
 				g.setColor(spielfeld.getBackground());				
 				g.fillRect(0, 0, spielfeld.getWidth(), spielfeld.getHeight());	
-				machnix();
 			}
 			
 		});
@@ -153,15 +140,12 @@ public class Einheit {
 		
 		}
 	
-	public void machnix() {
-		
-	}
-	
 
 	public void create(){
-
+		
 		Graphics g = spielfeld.getGraphics();
 		GameObject a = new GameObject();
 		g.drawImage(a.getImage(), x, y, 128, 128, null);
+		
 	}
 }
