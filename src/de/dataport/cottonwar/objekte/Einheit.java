@@ -13,11 +13,10 @@ import javax.swing.Timer;
 import de.dataport.cottonwar.gui.WorldHandler;
 
 public class Einheit implements Runnable {
-
+	
 	public static List<Einheit> einheiten = new ArrayList<Einheit>();
 
 	public static List<Einheit> einheiten2 = new ArrayList<Einheit>();
-
 
 	public int getX() {
 		return x;
@@ -56,11 +55,10 @@ public class Einheit implements Runnable {
 	Timer timer;
 	Timer timer2;
 
-	public Einheit(String name, int lp, int ap, int range, int gold, int ep,
-			int cost, int id, int x, int y, int height, int width, int speed) {
+	public Einheit(String name, int lp, int ap, int range, int gold, int ep, int cost, int id, int x, int y, int height, int width,
+			int speed, int spd) {
 		super();
-		
-		System.out.println("NEUE INSTANZ");
+
 		this.name = name;
 		this.lp = lp;
 		this.ap = ap;
@@ -74,6 +72,7 @@ public class Einheit implements Runnable {
 		this.height = height;
 		this.width = width;
 		this.speed = speed;
+		this.spd = spd;
 	}
 
 	static JPanel spielfeld;
@@ -86,13 +85,22 @@ public class Einheit implements Runnable {
 		this.spielfeld = spielfeld;
 	}
 
-
 	@Override
 	public void run() {
 		boolean stop = false;
+		Einheit s = null;
 		while (!stop) {
-			x = x + (id == 0 ? 1 : -1);
+			
 			stop = kollisionstest();
+			s = welchesobjekt();
+			if (s != null && s.id == id) {
+				stop = false;
+				continue;
+			}
+			x = x + (id == 0 ? 1 : -1);
+			if (s!=null && s.id != id) {
+				stop = angreifen(s);
+			}
 			try {
 				Thread.sleep(speed);
 			} catch (InterruptedException e) {
@@ -106,11 +114,9 @@ public class Einheit implements Runnable {
 		WorldHandler.executor.execute(this);
 	}
 
-
 	public void zeichnen() {
 
 		Timer timer = new Timer(10, new ActionListener() {
-
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -118,34 +124,160 @@ public class Einheit implements Runnable {
 
 				g.setColor(spielfeld.getBackground());
 				g.fillRect(0, 0, spielfeld.getWidth(), spielfeld.getHeight());
-	
-
+				
+				
 			}
 
 		});
+		
 		timer.start();
 
 	}
-	
 
 	public boolean kollisionstest() {
 
-		List<Einheit> enemies = einheiten2;
-		if (id == 0)
+		List<Einheit> enemies = null;
+		if (id == 0) {
 			enemies = einheiten;
+			Rectangle me = new Rectangle(x - 64 , y,64 , 10);
+			for (Einheit e : enemies) {
+				
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
 
-		Rectangle me = new Rectangle(x, y, 10, 10);
-		for (Einheit e : enemies) {
-			Rectangle enemy = new Rectangle(e.x, e.y, 10, 10);
-
-			if (me.intersects(enemy)) {
-				//einheiten.remove(me);
-				//einheiten2.remove(enemy);
-				System.out.println("Attacke");
-				return true;
+				if (me.intersects(enemy)) {
+					angreifen(e);
+					return true;
+				}
 			}
+			enemies = einheiten2;
+			for (Einheit k : enemies ) {
+				
+				Rectangle freund = new Rectangle(k.x-64, k.y,64,10);
+				
+				if (me.intersects(freund) && k.x != x){
+					return true;
+				}
+			}
+				
+			}else {
+				enemies = einheiten2;
+				Rectangle me = new Rectangle(x - 64 , y,64 , 10);
+				for (Einheit e : enemies) {
+					
+					Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
+
+					if (me.intersects(enemy)) {
+						angreifen(e);
+						return true;
+					}
+				}
+				enemies = einheiten;
+				for (Einheit k : enemies ) {
+					
+					Rectangle freund = new Rectangle(k.x-64, k.y,64,10);
+					
+					if (me.intersects(freund) && k.x != x){
+						return true;
+					}
+			}
+			
 		}
 		return false;
-	}
+	
+}
+	
+	public Einheit welchesobjekt() {
 
+		List<Einheit> enemies = null;
+		if (id == 0) {
+			enemies = einheiten;
+			Rectangle me = new Rectangle(x - 64 , y,64 , 10);
+			for (Einheit e : enemies) {
+				
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
+
+				if (me.intersects(enemy)) {
+					return(e);
+				}
+			}
+			enemies = einheiten2;
+			for (Einheit k : enemies ) {
+				
+				Rectangle freund = new Rectangle(k.x-64, k.y,64,10);
+				
+				if (me.intersects(freund) && k.x != x){
+					return k;
+				}
+			}
+				
+			}else {
+				enemies = einheiten2;
+				Rectangle me = new Rectangle(x - 64 , y,64 , 10);
+				for (Einheit e : enemies) {
+					
+					Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
+
+					if (me.intersects(enemy)) {
+						return(e);
+					}
+				}
+				enemies = einheiten;
+				for (Einheit k : enemies ) {
+					
+					Rectangle freund = new Rectangle(k.x-64, k.y,64,10);
+					
+					if (me.intersects(freund) && k.x != x){
+						return k;
+					}
+			}
+			
+		}
+		
+		return null;
+	
+}
+	
+	public int random() {
+		int zufall;
+		double ran = Math.random();
+		
+		zufall = (int)(ran*5) +1;
+		System.out.println(zufall);
+		return zufall;
+		
+	}
+	
+	public boolean angreifen(Einheit e) {
+		while(0 <= e.lp) {
+			
+			if (lp<=0) {
+				break;
+			}
+			
+			e.lp = e.lp - (ap + random());
+			
+			try {
+				Thread.sleep(spd);
+			} catch (InterruptedException e1) {
+				}
+			
+			
+			
+		}
+		if (lp > e.lp) {
+			if (id ==0) {
+				einheiten.remove(e);
+				e = null;
+				return false;
+			} else {
+				einheiten2.remove(e);
+				e = null;
+				return false;
+			}
+		}else {
+			return true;
+		}
+	}
+	
+	
 }

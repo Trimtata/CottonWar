@@ -65,15 +65,14 @@ public class WorldHandler extends JFrame {
 		JButton j = new JButton("Krieger");
 		JButton k = new JButton("Ritter");
 		JButton l = new JButton("Bogenmeister");
-		JButton m = new JButton("Krieger");
-		JButton n = new JButton("Ritter");
+		JButton m = new JButton("Ritter");
+		JButton n = new JButton("Krieger");
 		JButton o = new JButton("Bogenmeister");
-		final JButton josef = new JButton("Spiel starten");
 		
 		n.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Einheit e=new Einheit("Bogenmeister", 80, 20, 70, 15, 0, 25, 1, 890, 220,100,100, 5);
+				Einheit e=new Einheit("Bogenmeister", 80, 20, 70, 15, 0, 25, 1, 890, 220, 128, 128, 5,1000);
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
 				e.ausführen();
@@ -82,7 +81,7 @@ public class WorldHandler extends JFrame {
 		m.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Einheit e=new Einheit("Ritter", 200, 12, 10, 20, 0, 15, 1, 890, 220,100,100, 10);
+				Einheit e=new Einheit("Ritter", 200, 12, 10, 20, 0, 15, 1, 890, 220,128, 128, 10,1000);
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
 				e.ausführen();
@@ -91,7 +90,7 @@ public class WorldHandler extends JFrame {
 		o.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Einheit e=new Einheit("Krieger", 100, 20, 10, 15, 0, 10, 1, 890, 220,100,100, 10);
+				Einheit e=new Einheit("Krieger", 100, 20, 10, 15, 0, 10, 1, 890, 220,128, 128, 10,1000);
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
 				e.ausführen();
@@ -100,7 +99,7 @@ public class WorldHandler extends JFrame {
 		j.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Einheit e=new Einheit("Krieger", 100, 20, 10, 15, 0, 10, 0, 10, 220,100,100, 10);
+				Einheit e=new Einheit("Krieger", 100, 20, 10, 15, 0, 10, 0, 10, 220,128, 128, 5,1000);
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
 				e.ausführen();
@@ -109,7 +108,7 @@ public class WorldHandler extends JFrame {
 		k.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Einheit e=new Einheit("Ritter", 200, 12, 10, 20, 0, 15, 0, 10, 220,100,100, 10);
+				Einheit e=new Einheit("Ritter", 200, 12, 10, 20, 0, 15, 0, 10, 220,128, 128, 10,1000);
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
 				e.ausführen();
@@ -118,26 +117,17 @@ public class WorldHandler extends JFrame {
 		l.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Einheit e=new Einheit("Bogenmeister", 80, 20, 70, 15, 0, 25, 0, 10, 220,100,100, 5);
+				Einheit e=new Einheit("Bogenmeister", 80, 20, 70, 15, 0, 25, 0, 10, 220,128, 128, 10,1000);
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
 				e.ausführen();
 			}
 		});
-		josef.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				Einheit e =new Einheit("herbert", 0, 0, 0, 0, 0, 0, 0, 10, 220,100,100, 10);
-				e.setSpielfeld(spielfeld);
-				josef.setVisible(false);
-				e.zeichnen();
-			}
-		});
+		
 		
 		j.setBounds(10, 10, 80, 20);
 		k.setBounds(95, 10, 80, 20);
 		l.setBounds(180, 10, 80, 20);
-		josef.setBounds(500, 40, 110, 20);
 		o.setBounds(1090, 10, 80, 20);
 		m.setBounds(1000, 10, 80, 20);
 		n.setBounds(910, 10, 80, 20);
@@ -146,14 +136,13 @@ public class WorldHandler extends JFrame {
 		w.add(j);
 		w.add(k);
 		w.add(l);
-		w.add(josef);
 		w.add(o);
 		w.add(m);
 		w.add(n);
 
 		
 		
-		Timer timer = new Timer(10, new ActionListener() {
+		Timer timer = new Timer(1, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				spielfeld.repaint();
