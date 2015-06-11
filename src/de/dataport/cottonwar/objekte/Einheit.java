@@ -95,24 +95,13 @@ public class Einheit implements Runnable {
 		while (!stop) {
 
 			stop = kollisionstest();
-			if (stop == false)
-				continue;
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
 			s = welchesobjekt();
 			if (s != null && s.id == id) {
 				stop = false;
-				try {
-					Thread.sleep(50);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				continue;
-			}
+				}
+				
+			
 			x = x + (id == 0 ? 1 : -1);
 			if (s != null && s.id != id) {
 				stop = angreifen(s);
@@ -124,7 +113,7 @@ public class Einheit implements Runnable {
 			} catch (InterruptedException e) {
 			}
 
-		}
+	}
 
 	}
 	

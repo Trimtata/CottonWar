@@ -31,6 +31,8 @@ import java.awt.event.MouseEvent;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
 
 
 public class WorldHandler extends JFrame {
@@ -81,7 +83,7 @@ public class WorldHandler extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (gold2>=25) {
-				Einheit e=new Einheit("Bogenmeister", 80, 20, 70, 25, 0, 25, 1, 890, 220, 128, 128, 10,1000);
+				Einheit e=new Einheit("Krieger", 80, 20, 70, 25, 0, 25, 1, 890, 220, 128, 128, 20,1000);
 				gold2 = gold2 - e.getGold();
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
@@ -105,7 +107,7 @@ public class WorldHandler extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (gold2>=15) {
-				Einheit e=new Einheit("Krieger", 100, 20, 10, 15, 0, 10, 1, 890, 220,128, 128, 20,1000);
+				Einheit e=new Einheit("Bogenmeister", 100, 20, 10, 15, 0, 10, 1, 890, 220,128, 128, 10,1000);
 				gold2 = gold2 - e.getGold();
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
@@ -165,6 +167,15 @@ public class WorldHandler extends JFrame {
 		w.add(o);
 		w.add(m);
 		w.add(n);
+		
+		JLabel r = new JLabel(gold + "");
+		
+		r.setBounds(270, 13, 46, 14);
+		w.add(r);
+		
+		JLabel r2 = new JLabel(gold2 +"");
+		r2.setBounds(854, 13, 46, 14);
+		w.add(r2);
 
 		
 		
@@ -176,8 +187,28 @@ public class WorldHandler extends JFrame {
 		});
 		timer.start();
 		
+		Timer timer2 = new Timer(4000, new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			gold = gold + 10;
+			gold2 = gold2 +10;
+		}
+	});
+	timer2.start();
+		
 	}
 
+	public int wievielGold1() {
+		
+		return gold;
+		
+	}
+	public int wievielGold2() {
+		
+		return gold2;
+	}
+	
+	
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {
 			putValue(NAME, "SwingAction");
@@ -187,5 +218,4 @@ public class WorldHandler extends JFrame {
 			
 		}
 	}
-
 }
