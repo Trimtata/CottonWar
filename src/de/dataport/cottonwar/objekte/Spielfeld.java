@@ -36,7 +36,11 @@ public class Spielfeld extends JPanel {
 		einheiten.addAll(Einheit.einheiten2);
 
 		for (Einheit e : einheiten) {
+			if (e.name == "Basis") {
+				g.drawImage(e.image, e.x, e.y, 300, 300, null);
+			}else {
 			g.drawImage(e.image, e.x, e.y, 128, 128, null);
+			}
 		}
 	}
 

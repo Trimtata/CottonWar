@@ -44,6 +44,8 @@ public class WorldHandler extends JFrame {
 	public static int exp2;
 	public static int exp;
 	
+	public static boolean evolution = false;
+	
 	
 	public static ExecutorService executor = Executors.newCachedThreadPool();
 	
@@ -56,7 +58,7 @@ public class WorldHandler extends JFrame {
 		worldhander.setVisible(true);
 		
 		
-
+		
 		spielfeld = new Spielfeld();
 		spielfeld.setBounds(10, 200, 1590, 870);
 
@@ -71,11 +73,11 @@ public class WorldHandler extends JFrame {
 		w.setLayout(null);
 		w.add(spielfeld);
 		
-		Einheit basis1 = new Einheit("Basis", 1200, 12, 0, 9000, 12000, 0, 0, 10, 220, 300, 300, 0, 1500);
+		Einheit basis1 = new Einheit("Basis", 600, 12, 0, 9000, 12000, 0, 0, 10, 150, 300, 300, 0, 1500);
 		Einheit.einheiten2.add(basis1);
 		basis1.setSpielfeld(spielfeld);
 		basis1.ausführen();
-		Einheit basis2 = new Einheit("Basis", 1200, 12, 0, 9000, 12000, 0, 1, 890, 220, 300, 300, 0, 1500);
+		Einheit basis2 = new Einheit("Basis", 600, 12, 0, 9000, 12000, 0, 1, 890, 150, 300, 300, 0, 1500);
 		Einheit.einheiten.add(basis2);
 		basis2.setSpielfeld(spielfeld);
 		basis2.ausführen();
@@ -90,12 +92,20 @@ public class WorldHandler extends JFrame {
 		w.add(r2);
 		
 		
-		JButton j = new JButton("Krieger");
-		JButton k = new JButton("Ritter");
-		JButton l = new JButton("Bogenmeister");
-		JButton m = new JButton("Ritter");
-		JButton n = new JButton("Krieger");
-		JButton o = new JButton("Bogenmeister");
+		final JButton j = new JButton("Krieger");
+		final JButton k = new JButton("Ritter");
+		final JButton l = new JButton("Bogenmeister");
+		final JButton m = new JButton("Ritter");
+		final JButton n = new JButton("Krieger");
+		final JButton o = new JButton("Bogenmeister");
+		final JButton e1 = new JButton("Lord");
+		final JButton e2 = new JButton("Drache");
+		final JButton e3 = new JButton("Himmelswache");
+		final JButton e4= new JButton("Lord");
+		final JButton e5 = new JButton("Drache");
+		final JButton e6 = new JButton("Himmelswache");
+		final JButton eStart1 = new JButton("Technologie");
+		final JButton eStart2 = new JButton("Technologie");
 		
 		n.addMouseListener(new MouseAdapter() {
 			@Override
@@ -184,13 +194,130 @@ public class WorldHandler extends JFrame {
 		m.setBounds(1000, 10, 80, 20);
 		n.setBounds(910, 10, 80, 20);
 		
-				
+		e1.setBounds(10, 10, 80, 20);
+		e2.setBounds(95, 10, 80, 20);
+		e3.setBounds(180, 10, 80, 20);
+		e4.setBounds(1090, 10, 80, 20);
+		e5.setBounds(1000, 10, 80, 20);
+		e6.setBounds(910, 10, 80, 20);
+		eStart1.setBounds(10,40,80,20);
+		eStart2.setBounds(1090,40,80,20);
+		
+		e1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (gold2>=25) {
+				Einheit e=new Einheit("Krieger", 80, 20, 70, 25, 0, 25, 1, 890, 220, 128, 128, 20,1000);
+				gold2 = gold2 - e.getCost();
+				r2.setText(gold2+"");
+				Einheit.einheiten.add(e);
+				e.setSpielfeld(spielfeld);
+				e.ausführen();
+				}
+			}
+		});
+		e2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (gold2>=25) {
+				Einheit e=new Einheit("Krieger", 80, 20, 70, 25, 0, 25, 1, 890, 220, 128, 128, 20,1000);
+				gold2 = gold2 - e.getCost();
+				r2.setText(gold2+"");
+				Einheit.einheiten.add(e);
+				e.setSpielfeld(spielfeld);
+				e.ausführen();
+				}
+			}
+		});
+		e3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (gold2>=25) {
+				Einheit e=new Einheit("Krieger", 80, 20, 70, 25, 0, 25, 1, 890, 220, 128, 128, 20,1000);
+				gold2 = gold2 - e.getCost();
+				r2.setText(gold2+"");
+				Einheit.einheiten.add(e);
+				e.setSpielfeld(spielfeld);
+				e.ausführen();
+				}
+			}
+		});
+		e4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (gold2>=25) {
+				Einheit e=new Einheit("Krieger", 80, 20, 70, 25, 0, 25, 1, 890, 220, 128, 128, 20,1000);
+				gold2 = gold2 - e.getCost();
+				r2.setText(gold2+"");
+				Einheit.einheiten.add(e);
+				e.setSpielfeld(spielfeld);
+				e.ausführen();
+				}
+			}
+		});
+		e5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (gold2>=25) {
+				Einheit e=new Einheit("Krieger", 80, 20, 70, 25, 0, 25, 1, 890, 220, 128, 128, 20,1000);
+				gold2 = gold2 - e.getCost();
+				r2.setText(gold2+"");
+				Einheit.einheiten.add(e);
+				e.setSpielfeld(spielfeld);
+				e.ausführen();
+				}
+			}
+		});
+		e6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (gold2>=25) {
+				Einheit e=new Einheit("Krieger", 80, 20, 70, 25, 0, 25, 1, 890, 220, 128, 128, 20,1000);
+				gold2 = gold2 - e.getCost();
+				r2.setText(gold2+"");
+				Einheit.einheiten.add(e);
+				e.setSpielfeld(spielfeld);
+				e.ausführen();
+				}
+			}
+		});
+		eStart1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (exp<=5000) {
+					l.setVisible(false);
+					j.setVisible(false);
+					k.setVisible(false);
+					eStart1.setVisible(false);
+					
+					w.add(e1);
+					w.add(e2);
+					w.add(e3);
+				}
+			}
+		});
+		eStart2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (gold2>=25) {
+				Einheit e=new Einheit("Krieger", 80, 20, 70, 25, 0, 25, 1, 890, 220, 128, 128, 20,1000);
+				gold2 = gold2 - e.getCost();
+				r2.setText(gold2+"");
+				Einheit.einheiten.add(e);
+				e.setSpielfeld(spielfeld);
+				e.ausführen();
+				}
+			}
+		});
+		
 		w.add(j);
 		w.add(k);
 		w.add(l);
 		w.add(o);
 		w.add(m);
 		w.add(n);
+		w.add(eStart1);
+		w.add(eStart2);
 
 		
 		

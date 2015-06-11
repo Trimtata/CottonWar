@@ -80,12 +80,49 @@ public class Einheit implements Runnable {
 		this.speed = speed;
 		this.spd = spd;
 		
-		if (name.equals("Basis")) {
+		if (name.equals("Krieger")) {
 			this.image = Spielfeld.base;
 		}
-		else {
-			this.image = Spielfeld.ant;
+		if (name.equals("Basis2")) {
+			this.image = Spielfeld.base;
 		}
+//		if (name.equals("Krieger1")) {
+//			this.image = Spielfeld.ant;
+//		}
+//		if (name.equals("Krieger2")) {
+//			this.image = Spielfeld.base;
+//		}
+//		if (name.equals("Ritter1")) {
+//			this.image = Spielfeld.ant;
+//		}
+//		if (name.equals("Ritter2")) {
+//			this.image = Spielfeld.base;
+//		}
+//		if (name.equals("Reiter1")) {
+//			this.image = Spielfeld.ant;
+//		}
+//		if (name.equals("Reiter2")) {
+//			this.image = Spielfeld.base;
+//		}
+//		if (name.equals("Lord1")) {
+//			this.image = Spielfeld.ant;
+//		}
+//		if (name.equals("Lord2")) {
+//			this.image = Spielfeld.base;
+//		}
+//		if (name.equals("Drache1")) {
+//			this.image = Spielfeld.base;
+//		}
+//		if (name.equals("Drache2")) {
+//			this.image = Spielfeld.base;
+//		}
+//		if (name.equals("Himmelswache1")) {
+//			this.image = Spielfeld.base;
+//		}
+//		if (name.equals("Himmelswache2")) {
+//			this.image = Spielfeld.base;
+//		}
+		
 
 	}
 
@@ -212,7 +249,7 @@ public class Einheit implements Runnable {
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
 
-				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 90);
 
 				if (me.intersects(enemy)) {
 					// angreifen(e);
@@ -222,7 +259,7 @@ public class Einheit implements Runnable {
 			enemies = einheiten2;
 			for (Einheit k : enemies) {
 
-				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 10);
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 90);
 
 				if (me.intersects(freund) && k.x != x && k.x > x) {
 					if (k.name == "Basis")
@@ -236,7 +273,7 @@ public class Einheit implements Runnable {
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
 
-				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 90);
 
 				if (me.intersects(enemy)) {
 					// angreifen(e);
@@ -246,7 +283,7 @@ public class Einheit implements Runnable {
 			enemies = einheiten;
 			for (Einheit k : enemies) {
 
-				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 10);
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 90);
 
 				if (me.intersects(freund) && k.x != x && k.x < x) {
 					if (k.name =="Basis") {
@@ -269,7 +306,7 @@ public class Einheit implements Runnable {
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
 
-				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 90);
 
 				if (me.intersects(enemy)) {
 					return (e);
@@ -278,7 +315,7 @@ public class Einheit implements Runnable {
 			enemies = einheiten2;
 			for (Einheit k : enemies) {
 
-				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 10);
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 90);
 
 				if (me.intersects(freund) && k.x != x && k.x > x) {
 					if (k.name == "Basis") {
@@ -293,7 +330,7 @@ public class Einheit implements Runnable {
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
 
-				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 90);
 
 				if (me.intersects(enemy)) {
 					return (e);
@@ -302,7 +339,7 @@ public class Einheit implements Runnable {
 			enemies = einheiten;
 			for (Einheit k : enemies) {
 
-				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 10);
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 90);
 
 				if (me.intersects(freund) && k.x != x && k.x < x) {
 					if (k.name == "Basis") {
