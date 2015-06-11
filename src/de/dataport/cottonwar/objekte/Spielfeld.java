@@ -25,3 +25,6 @@ public class Spielfeld extends JPanel {
 	}
 
 }
+
+/* Range mit Parameter(Bogenmeister), , Basen, nach Kampf fortbewegen
+ * Speichern können, Multiplayer, Hauptmenü, Bilder */

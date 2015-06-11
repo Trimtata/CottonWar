@@ -64,7 +64,7 @@ public class WorldHandler extends JFrame {
 		JButton m = new JButton("Krieger");
 		JButton n = new JButton("Ritter");
 		JButton o = new JButton("Bogenmeister");
-		final JButton josef = new JButton("Spiel starten");
+	
 		
 		n.addMouseListener(new MouseAdapter() {
 			@Override
@@ -133,7 +133,6 @@ public class WorldHandler extends JFrame {
 		w.add(j);
 		w.add(k);
 		w.add(l);
-		w.add(josef);
 		w.add(o);
 		w.add(m);
 		w.add(n);

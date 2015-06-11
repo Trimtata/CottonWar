@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -129,21 +130,28 @@ public class Einheit implements Runnable {
 			Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
 
 			if (me.intersects(enemy)) {
-				einheiten.remove(me);
-				einheiten2.remove(enemy);
+				
 				System.out.println("Attacke");
+//				attacke(e);
+				
 				return true;
 			}
 		}
 		return false;
 	}
 
-	 public int attacke(){
-	
-	 if(kollisionstest() == true){
-	
-		 e.lp = e.lp - .ap * Math.random();
-	 }
-	 }
+//	 public void attacke(Einheit e){
+//		 
+//		 while(e.lp > 0 && lp > 0){
+//			 lp = (int) (lp - (ap * Math.random())); 
+//		 } 
+//		 if (e.lp <= 0) {
+//			 einheiten.remove(e);
+//			 einheiten2.remove(e);
+//			 e = null;
+//		}
+//		
+//	
+//	 }
 
 }
