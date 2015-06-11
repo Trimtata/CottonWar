@@ -13,7 +13,7 @@ import javax.swing.Timer;
 import de.dataport.cottonwar.gui.WorldHandler;
 
 public class Einheit implements Runnable {
-	
+
 	public static List<Einheit> einheiten = new ArrayList<Einheit>();
 
 	public static List<Einheit> einheiten2 = new ArrayList<Einheit>();
@@ -48,6 +48,9 @@ public class Einheit implements Runnable {
 
 	public void setWidth(int width) {
 		this.width = width;
+	}
+	public int getGold() {
+		return gold;
 	}
 
 	String name;
@@ -90,16 +93,31 @@ public class Einheit implements Runnable {
 		boolean stop = false;
 		Einheit s = null;
 		while (!stop) {
-			
+
 			stop = kollisionstest();
+			if (stop == false)
+				continue;
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
 			s = welchesobjekt();
 			if (s != null && s.id == id) {
 				stop = false;
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				continue;
 			}
 			x = x + (id == 0 ? 1 : -1);
-			if (s!=null && s.id != id) {
+			if (s != null && s.id != id) {
 				stop = angreifen(s);
+				if (stop == true)
+					break;
 			}
 			try {
 				Thread.sleep(speed);
@@ -109,6 +127,43 @@ public class Einheit implements Runnable {
 		}
 
 	}
+	
+	
+
+	public boolean angreifen(Einheit e) {
+		while (0 <= e.lp) {
+
+			if (lp <= 0) {
+				break;
+			}
+
+			e.lp = e.lp - (ap + random());
+
+			try {
+				Thread.sleep(spd);
+			} catch (InterruptedException e1) {
+			}
+
+		}
+		if (lp > e.lp) {
+			if (id == 0) {
+				WorldHandler.exp = WorldHandler.exp + e.ep;
+				WorldHandler.gold = WorldHandler.gold + e.gold;
+				einheiten.remove(e);
+				return false;
+			} else {
+				WorldHandler.exp2 = WorldHandler.exp2 + e.ep;
+				WorldHandler.gold2 = WorldHandler.exp + e.gold;
+				einheiten2.remove(e);
+				return false;
+			}
+		}
+		return true;
+
+	}
+
+	
+	
 
 	public void ausführen() {
 		WorldHandler.executor.execute(this);
@@ -124,12 +179,11 @@ public class Einheit implements Runnable {
 
 				g.setColor(spielfeld.getBackground());
 				g.fillRect(0, 0, spielfeld.getWidth(), spielfeld.getHeight());
-				
-				
+
 			}
 
 		});
-		
+
 		timer.start();
 
 	}
@@ -139,145 +193,109 @@ public class Einheit implements Runnable {
 		List<Einheit> enemies = null;
 		if (id == 0) {
 			enemies = einheiten;
-			Rectangle me = new Rectangle(x - 64 , y,64 , 10);
+			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
-				
+
 				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
 
 				if (me.intersects(enemy)) {
-					angreifen(e);
+					//angreifen(e);
 					return true;
 				}
 			}
 			enemies = einheiten2;
-			for (Einheit k : enemies ) {
-				
-				Rectangle freund = new Rectangle(k.x-64, k.y,64,10);
-				
-				if (me.intersects(freund) && k.x != x){
+			for (Einheit k : enemies) {
+
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 10);
+
+				if (me.intersects(freund) && k.x != x && k.x > x) {
 					return true;
 				}
 			}
-				
-			}else {
-				enemies = einheiten2;
-				Rectangle me = new Rectangle(x - 64 , y,64 , 10);
-				for (Einheit e : enemies) {
-					
-					Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
 
-					if (me.intersects(enemy)) {
-						angreifen(e);
-						return true;
-					}
+		} else {
+			enemies = einheiten2;
+			Rectangle me = new Rectangle(x - 64, y, 64, 10);
+			for (Einheit e : enemies) {
+
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
+
+				if (me.intersects(enemy)) {
+					//angreifen(e);
+					return true;
 				}
-				enemies = einheiten;
-				for (Einheit k : enemies ) {
-					
-					Rectangle freund = new Rectangle(k.x-64, k.y,64,10);
-					
-					if (me.intersects(freund) && k.x != x){
-						return true;
-					}
 			}
-			
+			enemies = einheiten;
+			for (Einheit k : enemies) {
+
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 10);
+
+				if (me.intersects(freund) && k.x != x && k.x < x) {
+					return true;
+				}
+			}
+
 		}
 		return false;
-	
-}
-	
+
+	}
+
 	public Einheit welchesobjekt() {
 
 		List<Einheit> enemies = null;
 		if (id == 0) {
 			enemies = einheiten;
-			Rectangle me = new Rectangle(x - 64 , y,64 , 10);
+			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
-				
+
 				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
 
 				if (me.intersects(enemy)) {
-					return(e);
+					return (e);
 				}
 			}
 			enemies = einheiten2;
-			for (Einheit k : enemies ) {
-				
-				Rectangle freund = new Rectangle(k.x-64, k.y,64,10);
-				
-				if (me.intersects(freund) && k.x != x){
+			for (Einheit k : enemies) {
+
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 10);
+
+				if (me.intersects(freund) && k.x != x && k.x > x) {
 					return k;
 				}
 			}
-				
-			}else {
-				enemies = einheiten2;
-				Rectangle me = new Rectangle(x - 64 , y,64 , 10);
-				for (Einheit e : enemies) {
-					
-					Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
 
-					if (me.intersects(enemy)) {
-						return(e);
-					}
+		} else {
+			enemies = einheiten2;
+			Rectangle me = new Rectangle(x - 64, y, 64, 10);
+			for (Einheit e : enemies) {
+
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
+
+				if (me.intersects(enemy)) {
+					return (e);
 				}
-				enemies = einheiten;
-				for (Einheit k : enemies ) {
-					
-					Rectangle freund = new Rectangle(k.x-64, k.y,64,10);
-					
-					if (me.intersects(freund) && k.x != x){
-						return k;
-					}
 			}
-			
+			enemies = einheiten;
+			for (Einheit k : enemies) {
+
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 10);
+
+				if (me.intersects(freund) && k.x != x && k.x < x) {
+					return k;
+				}
+			}
+
 		}
-		
+
 		return null;
-	
-}
-	
+
+	}
+
 	public int random() {
 		int zufall;
-		double ran = Math.random();
-		
-		zufall = (int)(ran*5) +1;
-		System.out.println(zufall);
+		zufall = (int) (Math.random() * 5) + 1;
 		return zufall;
-		
+
 	}
-	
-	public boolean angreifen(Einheit e) {
-		while(0 <= e.lp) {
-			
-			if (lp<=0) {
-				break;
-			}
-			
-			e.lp = e.lp - (ap + random());
-			
-			try {
-				Thread.sleep(spd);
-			} catch (InterruptedException e1) {
-				}
-			
-			
-			
-		}
-		if (lp > e.lp) {
-			if (id ==0) {
-				einheiten.remove(e);
-				e = null;
-				return false;
-			} else {
-				einheiten2.remove(e);
-				e = null;
-				return false;
-			}
-		}else {
-			return true;
-		}
-	}
-	
-	
+
 }
