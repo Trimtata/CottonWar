@@ -63,13 +63,31 @@ public class WorldHandler extends JFrame {
 
 		gold =100;
 		gold2 = 100;
-		exp2 = 100;
+		exp2 = 0;
 		exp = 0;
 		w = new World();
 		worldhander.setContentPane(w);
 		getContentPane().setLayout(null);
 		w.setLayout(null);
 		w.add(spielfeld);
+		
+		Einheit basis1 = new Einheit("Basis", 1200, 12, 0, 9000, 12000, 0, 0, 10, 220, 300, 300, 0, 1500);
+		Einheit.einheiten2.add(basis1);
+		basis1.setSpielfeld(spielfeld);
+		basis1.ausführen();
+		Einheit basis2 = new Einheit("Basis", 1200, 12, 0, 9000, 12000, 0, 1, 890, 220, 300, 300, 0, 1500);
+		Einheit.einheiten.add(basis2);
+		basis2.setSpielfeld(spielfeld);
+		basis2.ausführen();
+		
+		
+		final JLabel r = new JLabel(gold + "");
+		r.setBounds(270, 13, 46, 14);
+		w.add(r);
+		
+		final JLabel r2 = new JLabel(gold2 +"");
+		r2.setBounds(854, 13, 46, 14);
+		w.add(r2);
 		
 		
 		JButton j = new JButton("Krieger");
@@ -84,7 +102,8 @@ public class WorldHandler extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (gold2>=25) {
 				Einheit e=new Einheit("Krieger", 80, 20, 70, 25, 0, 25, 1, 890, 220, 128, 128, 20,1000);
-				gold2 = gold2 - e.getGold();
+				gold2 = gold2 - e.getCost();
+				r2.setText(gold2+"");
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
 				e.ausführen();
@@ -96,7 +115,8 @@ public class WorldHandler extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (gold2>=20) {
 				Einheit e=new Einheit("Ritter", 200, 12, 10, 20, 0, 15, 1, 890, 220,128, 128, 30,1000);
-				gold2 = gold2 - e.getGold();
+				gold2 = gold2 - e.getCost();
+				r2.setText(gold2+"");
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
 				e.ausführen();
@@ -108,7 +128,8 @@ public class WorldHandler extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (gold2>=15) {
 				Einheit e=new Einheit("Bogenmeister", 100, 20, 10, 15, 0, 10, 1, 890, 220,128, 128, 10,1000);
-				gold2 = gold2 - e.getGold();
+				gold2 = gold2 - e.getCost();
+				r2.setText(gold2+"");
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
 				e.ausführen();
@@ -120,7 +141,8 @@ public class WorldHandler extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (gold>= 15) {				
 				Einheit e=new Einheit("Krieger", 100, 20, 10, 15, 0, 10, 0, 10, 220,128, 128, 20,1000);
-				gold = gold - e.getGold();
+				gold = gold - e.getCost();
+				r.setText(gold+"");
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
 				e.ausführen();
@@ -132,7 +154,8 @@ public class WorldHandler extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (gold >=20) {
 				Einheit e=new Einheit("Ritter", 200, 12, 10, 20, 0, 15, 0, 10, 220,128, 128, 30,1000);
-				gold = gold - e.getGold();
+				gold = gold - e.getCost();
+				r.setText(gold+"");
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
 				e.ausführen();
@@ -144,7 +167,8 @@ public class WorldHandler extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				if (gold>=30) {
 				Einheit e=new Einheit("Bogenmeister", 80, 20, 70, 15, 0, 25, 0, 10, 220,128, 128, 10,1000);
-				gold = gold - e.getGold();
+				gold = gold - e.getCost();
+				r.setText(gold+"");
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
 				e.ausführen();
@@ -167,15 +191,6 @@ public class WorldHandler extends JFrame {
 		w.add(o);
 		w.add(m);
 		w.add(n);
-		
-		JLabel r = new JLabel(gold + "");
-		
-		r.setBounds(270, 13, 46, 14);
-		w.add(r);
-		
-		JLabel r2 = new JLabel(gold2 +"");
-		r2.setBounds(854, 13, 46, 14);
-		w.add(r2);
 
 		
 		
@@ -187,23 +202,25 @@ public class WorldHandler extends JFrame {
 		});
 		timer.start();
 		
-		Timer timer2 = new Timer(4000, new ActionListener() {
+		Timer timer2 = new Timer(2000, new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			gold = gold + 10;
-			gold2 = gold2 +10;
+			gold = gold + 1;
+			gold2 = gold2 +1;
+			r.setText(gold+"");
+			r2.setText(gold2+"");
 		}
 	});
 	timer2.start();
 		
 	}
 
-	public int wievielGold1() {
+	public int getGold1() {
 		
 		return gold;
 		
 	}
-	public int wievielGold2() {
+	public int getGold2() {
 		
 		return gold2;
 	}

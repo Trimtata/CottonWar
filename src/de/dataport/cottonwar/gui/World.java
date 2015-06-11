@@ -36,10 +36,6 @@ public class World extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	public  JPanel panel;
 	
-
-	GameObject a = new GameObject();
-	
-
 	public World() {
 
 	}
@@ -60,9 +56,9 @@ public class World extends JPanel implements ActionListener{
 	}
 
 	
-	public void create(){
-
-		Graphics g = this.getGraphics();
-		g.drawImage(a.i, a.x, a.y, 200, 300, null);
-	}
+//	public void create(){
+//
+//		Graphics g = this.getGraphics();
+//		g.drawImage(a.i, a.x, a.y, 200, 300, null);
+//	}
 }
