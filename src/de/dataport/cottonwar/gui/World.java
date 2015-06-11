@@ -37,7 +37,6 @@ public class World extends JPanel implements ActionListener{
 	public  JPanel panel;
 	
 	public World() {
-
 	}
 
 	private class SwingAction extends AbstractAction {
