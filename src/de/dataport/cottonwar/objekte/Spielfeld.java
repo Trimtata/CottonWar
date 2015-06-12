@@ -32,7 +32,7 @@ public class Spielfeld extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
+                              
 		List<Einheit> einheiten = new ArrayList<Einheit>();
 		einheiten.addAll(Einheit.einheiten);
 		einheiten.addAll(Einheit.einheiten2);
