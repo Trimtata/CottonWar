@@ -36,7 +36,7 @@ public class Spielfeld extends JPanel {
 		List<Einheit> einheiten = new ArrayList<Einheit>();
 		einheiten.addAll(Einheit.einheiten);
 		einheiten.addAll(Einheit.einheiten2);
-
+      
 		for (Einheit e : einheiten) {
 			if (e.name == "Basis") {
 				g.drawImage(e.image, e.x, e.y, 300, 300, null);
@@ -44,7 +44,7 @@ public class Spielfeld extends JPanel {
 			g.drawImage(e.image, e.x, e.y, 128, 128, null);
 			}
 			
-			g.drawImage(background, 0,0, 1160, 450,null);
+//			g.drawImage(background, 0,0, 1160, 450,null);
 			
 		}
 	}
