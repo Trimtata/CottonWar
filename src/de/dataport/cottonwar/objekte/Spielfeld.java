@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 public class Spielfeld extends JPanel {
 
-	public static Image background;
+	public static Image background, backgroundh, backgroundw;
 	public static Image ant;
 	public static Image base;
 	
@@ -21,6 +21,8 @@ public class Spielfeld extends JPanel {
 			background = ImageIO.read(new File("Hintergrund 2.jpg"));
 			ant = ImageIO.read(new File("ant.png"));
 			base = ImageIO.read(new File("Base.png"));
+			backgroundw = ImageIO.read(new File("Hintergrund 2.1.png"));
+			backgroundh = ImageIO.read(new File("Hintergrundhaupt.png"));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -41,6 +43,9 @@ public class Spielfeld extends JPanel {
 			}else {
 			g.drawImage(e.image, e.x, e.y, 128, 128, null);
 			}
+			
+			g.drawImage(background, 0,0, 1160, 450,null);
+			
 		}
 	}
 

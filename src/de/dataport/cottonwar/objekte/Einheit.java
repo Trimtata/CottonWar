@@ -80,7 +80,7 @@ public class Einheit implements Runnable {
 		this.speed = speed;
 		this.spd = spd;
 		
-		if (name.equals("Krieger")) {
+		if (name.equals("Krieger1")) {
 			this.image = Spielfeld.base;
 		}
 		if (name.equals("Basis2")) {

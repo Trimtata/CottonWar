@@ -16,6 +16,7 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
 import de.dataport.cottonwar.objekte.Einheit;
+import de.dataport.cottonwar.objekte.Spielfeld;
 
 import javax.swing.JButton;
 
@@ -54,6 +55,8 @@ public class World extends JPanel implements ActionListener{
 
 	}
 
+	
+	
 	
 //	public void create(){
 //
