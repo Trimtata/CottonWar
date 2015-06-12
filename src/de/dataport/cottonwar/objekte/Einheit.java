@@ -1,9 +1,7 @@
 package de.dataport.cottonwar.objekte;
 
-import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -21,6 +19,9 @@ public class Einheit implements Runnable {
 
 	public int getX() {
 		return x;
+	}
+	public int getCost() {
+		return cost;
 	}
 
 	public void setX(int x) {
@@ -50,6 +51,7 @@ public class Einheit implements Runnable {
 	public void setWidth(int width) {
 		this.width = width;
 	}
+
 	public int getGold() {
 		return gold;
 	}
@@ -59,6 +61,7 @@ public class Einheit implements Runnable {
 			speed = 10;
 	Timer timer;
 	Timer timer2;
+	public Image image;
 
 	public Einheit(String name, int lp, int ap, int range, int gold, int ep, int cost, int id, int x, int y, int height, int width,
 			int speed, int spd) {
@@ -78,6 +81,51 @@ public class Einheit implements Runnable {
 		this.width = width;
 		this.speed = speed;
 		this.spd = spd;
+		
+		if (name.equals("Krieger1")) {
+			this.image = Spielfeld.base;
+		}
+		if (name.equals("Basis2")) {
+			this.image = Spielfeld.base;
+		}
+//		if (name.equals("Krieger1")) {
+//			this.image = Spielfeld.ant;
+//		}
+//		if (name.equals("Krieger2")) {
+//			this.image = Spielfeld.base;
+//		}
+//		if (name.equals("Ritter1")) {
+//			this.image = Spielfeld.ant;
+//		}
+//		if (name.equals("Ritter2")) {
+//			this.image = Spielfeld.base;
+//		}
+//		if (name.equals("Reiter1")) {
+//			this.image = Spielfeld.ant;
+//		}
+//		if (name.equals("Reiter2")) {
+//			this.image = Spielfeld.base;
+//		}
+//		if (name.equals("Lord1")) {
+//			this.image = Spielfeld.ant;
+//		}
+//		if (name.equals("Lord2")) {
+//			this.image = Spielfeld.base;
+//		}
+//		if (name.equals("Drache1")) {
+//			this.image = Spielfeld.base;
+//		}
+//		if (name.equals("Drache2")) {
+//			this.image = Spielfeld.base;
+//		}
+//		if (name.equals("Himmelswache1")) {
+//			this.image = Spielfeld.base;
+//		}
+//		if (name.equals("Himmelswache2")) {
+//			this.image = Spielfeld.base;
+//		}
+		
+
 	}
 
 	static JPanel spielfeld;
@@ -90,38 +138,57 @@ public class Einheit implements Runnable {
 		this.spielfeld = spielfeld;
 	}
 
+	boolean hasStopped;
+
 	@Override
 	public void run() {
+		
 		boolean stop = false;
 		Einheit s = null;
 		while (!stop) {
-
-			stop = kollisionstest();
-			s = welchesobjekt();
+			if (this.name == "Basis") {
+			break;
+		}
+			synchronized (einheiten) {
+				stop = kollisionstest();
+				s = welchesobjekt();
+			}
+//			if (hasStopped)
+//				System.out.println("coll: " + stop + " " + s + (s != null ? s.id : ""));
+			
 			if (s != null && s.id == id) {
 				stop = false;
-				continue;
-				}
 				
+//				System.out.println("stopped");
+				
+//				hasStopped = true;
+				sleep();
+				continue;
+			}
+			
+//			if (hasStopped)
+//				System.out.println("moving a step " + stop);
 			
 			x = x + (id == 0 ? 1 : -1);
 			if (s != null && s.id != id) {
 				stop = angreifen(s);
-				if (stop == true)
+				if (stop == true) {
 					break;
+				}
 			}
-			try {
-				Thread.sleep(speed);
-			} catch (InterruptedException e) {
-			}
+			sleep();
+		}
 
 	}
 
+	public void sleep() {
+		try {
+			Thread.sleep(speed);
+		} catch (InterruptedException e) {
+		}
 	}
-	
-	
 
-	public boolean angreifen(Einheit e) {
+	public synchronized boolean angreifen(Einheit e) {
 		while (0 <= e.lp) {
 
 			if (lp <= 0) {
@@ -153,31 +220,28 @@ public class Einheit implements Runnable {
 
 	}
 
-	
-	
-
 	public void ausführen() {
 		WorldHandler.executor.execute(this);
 	}
 
-	public void zeichnen() {
-
-		Timer timer = new Timer(10, new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Graphics g = spielfeld.getGraphics();
-
-				g.setColor(spielfeld.getBackground());
-				g.fillRect(0, 0, spielfeld.getWidth(), spielfeld.getHeight());
-
-			}
-
-		});
-
-		timer.start();
-
-	}
+//	public void zeichnen() {
+//
+//		Timer timer = new Timer(10, new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				Graphics g = spielfeld.getGraphics();
+//
+//				g.setColor(spielfeld.getBackground());
+//				g.fillRect(0, 0, spielfeld.getWidth(), spielfeld.getHeight());
+//
+//			}
+//
+//		});
+//
+//		timer.start();
+//
+//	}
 
 	public boolean kollisionstest() {
 
@@ -188,11 +252,13 @@ public class Einheit implements Runnable {
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
 
-				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
+
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 90);
+
 
 
 				if (me.intersects(enemy)) {
-					//angreifen(e);
+					// angreifen(e);
 					return true;
 				}
 
@@ -200,9 +266,11 @@ public class Einheit implements Runnable {
 			enemies = einheiten2;
 			for (Einheit k : enemies) {
 
-				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 10);
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 90);
 
 				if (me.intersects(freund) && k.x != x && k.x > x) {
+					if (k.name == "Basis")
+						return false;
 					return true;
 				}
 			}
@@ -212,19 +280,22 @@ public class Einheit implements Runnable {
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
 
-				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 90);
 
 				if (me.intersects(enemy)) {
-					//angreifen(e);
+					// angreifen(e);
 					return true;
 				}
 			}
 			enemies = einheiten;
 			for (Einheit k : enemies) {
 
-				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 10);
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 90);
 
 				if (me.intersects(freund) && k.x != x && k.x < x) {
+					if (k.name =="Basis") {
+						return false;
+					}
 					return true;
 				}
 			}
@@ -242,7 +313,7 @@ public class Einheit implements Runnable {
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
 
-				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 90);
 
 				if (me.intersects(enemy)) {
 					return (e);
@@ -251,9 +322,12 @@ public class Einheit implements Runnable {
 			enemies = einheiten2;
 			for (Einheit k : enemies) {
 
-				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 10);
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 90);
 
 				if (me.intersects(freund) && k.x != x && k.x > x) {
+					if (k.name == "Basis") {
+						return null;
+					}
 					return k;
 				}
 			}
@@ -263,7 +337,7 @@ public class Einheit implements Runnable {
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
 
-				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 10);
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 90);
 
 				if (me.intersects(enemy)) {
 					return (e);
@@ -272,9 +346,12 @@ public class Einheit implements Runnable {
 			enemies = einheiten;
 			for (Einheit k : enemies) {
 
-				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 10);
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 90);
 
 				if (me.intersects(freund) && k.x != x && k.x < x) {
+					if (k.name == "Basis") {
+						return null;
+					}
 					return k;
 				}
 			}

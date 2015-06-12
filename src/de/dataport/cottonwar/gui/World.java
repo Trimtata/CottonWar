@@ -16,6 +16,7 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
 import de.dataport.cottonwar.objekte.Einheit;
+import de.dataport.cottonwar.objekte.Spielfeld;
 
 import javax.swing.JButton;
 
@@ -36,12 +37,7 @@ public class World extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	public  JPanel panel;
 	
-
-	GameObject a = new GameObject();
-	
-
 	public World() {
-
 	}
 
 	private class SwingAction extends AbstractAction {
@@ -60,9 +56,11 @@ public class World extends JPanel implements ActionListener{
 	}
 
 	
-	public void create(){
-
-		Graphics g = this.getGraphics();
-		g.drawImage(a.i, a.x, a.y, 200, 300, null);
-	}
+	
+	
+//	public void create(){
+//
+//		Graphics g = this.getGraphics();
+//		g.drawImage(a.i, a.x, a.y, 200, 300, null);
+//	}
 }
