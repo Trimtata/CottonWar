@@ -35,6 +35,8 @@ public class World extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	public  JPanel panel;
+	
+
 	GameObject a = new GameObject();
 	
 
