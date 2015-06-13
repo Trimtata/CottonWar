@@ -87,14 +87,14 @@ public class Hauptmenue extends JFrame implements ActionListener {
 
 		if (e.getSource() == einheiten) {
 			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Krieger: LP   \tAp \t Gold \n \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t100 \t12 \t15", "Information", JOptionPane.DEFAULT_OPTION,
+			JOptionPane.showOptionDialog(null, "Evolutionsstufe primitiv \nKrieger: Lebenspunkte \t \t \tAngriffswert \t \t \tGolddrop \n \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t100 \t" + " \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t20 \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t15 \n \n" + "Ritter: Lebenspunkte \t \t \tAngriffswert \t \t \tGolddrop \n \t \t \t \t \t \t \t \t \t \t \t \t \t \t200 \t" + " \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t12 \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t20 \n \n" + "Reiter: Lebenspunkte \t \t \tAngriffswert \t \t \tGolddrop \n \t \t \t \t \t \t \t \t \t \t \t \t \t80 \t" + " \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t20 \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t30 \n\n\n" + "Evolutionsstufe fortgeschritten \nLord: Lebenspunkte \t \t \tAngriffswert \t \t \tGolddrop \n \t \t \t \t \t \t \t \t \t \t \t \t160 \t" + " \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t30 \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t45 \n \nDrache: Lebenspunkte \t \t \tAngriffswert \t \t \tGolddrop \n \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t250 \t" + " \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t40 \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t50 \n \nHimmelswacht: Lebenspunkte \t \t \tAngriffswert \t \t \tGolddrop \n \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t400 \t" + " \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t55 \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t150 \n \n \n Basen: Lebenspunkte \t \t \tAngriffswert \n \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t250 \t" + " \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t40", "Information", JOptionPane.DEFAULT_OPTION,
 					JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
 		}
 		
 		if (e.getSource() == story) {
 			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "peterNachdem ein riesiger Meteorit die Menschheit im Jahr 3056 vernichtete, \nwurde die Erde zu einem kalten und düsteren Ort. Nach etwa 4 Millionen Jahren der Einöde brachte das Wunder der Evolution erneut die Menschen hervor. \nDiese kämpften in der harschen Natur ums Überleben und schlossen sich zur besseren Verteidigung in Gruppen zusammen. \nZwei dieser Gruppen kämpften immer wieder um ihr Territorium, bis sich der Konflikt letztlich in einem 4 Jährigen Krieg zuspitzte, dem Cotton War. \n"
+			JOptionPane.showOptionDialog(null, "Nachdem ein riesiger Meteorit die Menschheit im Jahr 3056 vernichtete, \nwurde die Erde zu einem kalten und düsteren Ort. Nach etwa 4 Millionen Jahren der Einöde brachte das Wunder der Evolution erneut die Menschen hervor. \nDiese kämpften in der harschen Natur ums Überleben und schlossen sich zur besseren Verteidigung in Gruppen zusammen. \nZwei dieser Gruppen kämpften immer wieder um ihr Territorium, bis sich der Konflikt letztlich in einem 4 Jährigen Krieg zuspitzte, dem Cotton War. \n"
 					+ "Führen sie ihre Fraktion zum Sieg und beherrschen sie die Welt in diesem actiongeladenen Indie-Titel.", "Story", JOptionPane.DEFAULT_OPTION,
 					JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
@@ -102,7 +102,7 @@ public class Hauptmenue extends JFrame implements ActionListener {
 		
 		if (e.getSource() == info) {
 			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "", "Tastaturbelegungl", JOptionPane.DEFAULT_OPTION,
+			JOptionPane.showOptionDialog(null, "\t \t \t \t \t \t \t \t\t \t \t \t \t \t \t \t \t \tSpieler 1 \t \t \t \t \tSpieler2 \n" + "Krieger: \tQ \t \t \t \t \t\t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \tI \n\n" + "Ritter: \t \t \t \t \tW \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \tO \n\n" + "Reiter: \t \t \t \t \tE \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \tP \n\n" + "Lord: \t \t \t \t \t \t \tA \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \tJ \n\n" + "Drache: \t \tS \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \tK \n\n" + "Himmels- \nwächter: \tD \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \tL", "Tastaturbelegungl", JOptionPane.DEFAULT_OPTION,
 					JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
 		}
