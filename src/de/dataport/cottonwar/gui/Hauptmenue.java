@@ -97,7 +97,7 @@ public class Hauptmenue extends JFrame implements ActionListener {
 		
 		if (e.getSource() == story) {
 			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Nachdem ein riesiger Meteorit die Menschheit im Jahr 3056 vernichtete, \nwurde die Erde zu einem kalten und düsteren Ort. Nach etwa 4 Millionen Jahren der Einöde brachte das Wunder der Evolution erneut die Menschen hervor. \nDiese kämpften in der harschen Natur ums Überleben und schlossen sich zur besseren Verteidigung in Gruppen zusammen. \nZwei dieser Gruppen kämpften immer wieder um ihr Territorium, bis sich der Konflikt letztlich in einem 4 Jährigen Krieg zuspitzte, dem Cotton War. \n"
+			JOptionPane.showOptionDialog(null, "peterNachdem ein riesiger Meteorit die Menschheit im Jahr 3056 vernichtete, \nwurde die Erde zu einem kalten und düsteren Ort. Nach etwa 4 Millionen Jahren der Einöde brachte das Wunder der Evolution erneut die Menschen hervor. \nDiese kämpften in der harschen Natur ums Überleben und schlossen sich zur besseren Verteidigung in Gruppen zusammen. \nZwei dieser Gruppen kämpften immer wieder um ihr Territorium, bis sich der Konflikt letztlich in einem 4 Jährigen Krieg zuspitzte, dem Cotton War. \n"
 					+ "Führen sie ihre Fraktion zum Sieg und beherrschen sie die Welt in diesem actiongeladenen Indie-Titel.", "Story", JOptionPane.DEFAULT_OPTION,
 					JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 

@@ -72,15 +72,16 @@ public class WorldHandler extends JFrame implements KeyListener {
 		this.requestFocusInWindow();
 		gold = 100;
 		gold2 = 100;
-
 		exp2 = 0;
 		exp = 0;
 		
 		
 		w.add(spielfeld);
+
 		
 		
 		final Einheit basis1 = new Einheit("Basis1", 1000, 12, 0, 9000, 12000, 0, 0, -20, 50, 300, 300, 0, 1500);
+
 		Einheit.einheiten2.add(basis1);
 		basis1.setSpielfeld(spielfeld);
 		basis1.ausführen();
@@ -90,8 +91,10 @@ public class WorldHandler extends JFrame implements KeyListener {
 		basis2.ausführen();
 
 		final JLabel r = new JLabel(gold + "");
+
 		r.setBounds(99, 99, 46, 14);
 		r.setForeground(Color.yellow);
+
 		w.add(r);
 		final JLabel r2 = new JLabel(gold2 + "");
 		r2.setBounds(1077, 99, 46, 14);

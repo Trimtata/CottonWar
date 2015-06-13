@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -61,7 +62,8 @@ public class Einheit implements Runnable {
 	}
 
 	String name;
-	int lp, ap, spd, range, gold, ep, cost, id, x, y, height, width, speed = 10;
+	int lp, ap, spd, range, gold, ep, cost, id, x, y, height, width,
+			speed = 10;
 	Timer timer;
 	Timer timer2;
 	public Image image;
@@ -218,7 +220,6 @@ public class Einheit implements Runnable {
 					try {
 						Thread.sleep(3000);
 					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					System.exit(0);
@@ -235,7 +236,6 @@ public class Einheit implements Runnable {
 					try {
 						Thread.sleep(3000);
 					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					System.exit(0);
@@ -275,15 +275,19 @@ public class Einheit implements Runnable {
 		List<Einheit> enemies = null;
 		if (id == 0) {
 			enemies = einheiten;
+
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
 
 				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 400);
 
+
+
 				if (me.intersects(enemy)) {
 					// angreifen(e);
 					return true;
 				}
+
 			}
 			enemies = einheiten2;
 			for (Einheit k : enemies) {
@@ -400,5 +404,6 @@ public class Einheit implements Runnable {
 		return zufall;
 
 	}
+
 
 }

@@ -62,3 +62,6 @@ public class Spielfeld extends JPanel {
 	}
 
 }
+
+/* Range mit Parameter(Bogenmeister), , , 
+ * Speichern können, Multiplayer, Hauptmenü, Bilder */
