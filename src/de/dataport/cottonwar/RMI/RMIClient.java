@@ -18,10 +18,9 @@ public class RMIClient {
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
 			ServiceInterface stub = (ServiceInterface) registry.lookup("Werte übermitteln...");
 
-			for (int i = 0; i <= 2; i++) {
 				LpGoldExp s = stub.getLpGoldExp();
 				System.out.println(s.toString());
-			}
+			
 		}
 		catch (RemoteException | NotBoundException ex) {
 			ex.printStackTrace();

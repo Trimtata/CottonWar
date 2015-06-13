@@ -11,8 +11,8 @@ import de.dataport.cottonwar.gui.WorldHandler;
 import de.dataport.cottonwar.RMI.*;
 
 public class Service implements ServiceInterface {
-
-	private static List<LpGoldExp> werte;
+	
+	static LpGoldExp werte;
 
 	Service() throws RemoteException {
 		super();
@@ -20,8 +20,7 @@ public class Service implements ServiceInterface {
 
 	public static void main(String[] argv) {
 
-		werte = new ArrayList<LpGoldExp>();
-		werte.add(new LpGoldExp(WorldHandler.exp, WorldHandler.exp2, WorldHandler.gold, WorldHandler.gold2, WorldHandler.lp, WorldHandler.lp2));
+		werte = new LpGoldExp(WorldHandler.exp, WorldHandler.exp2, WorldHandler.gold, WorldHandler.gold2, WorldHandler.lp, WorldHandler.lp2);
 
 		try {
 			Registry registry = LocateRegistry.createRegistry(1099);
@@ -39,7 +38,7 @@ public class Service implements ServiceInterface {
 	@Override
 	public LpGoldExp getLpGoldExp() throws RemoteException {
 		System.out.println("Eine Anfrage für die Aktuellen Spielwerte wurde erstellt...");
-		return werte.get(0);
+		return werte;
 	}		
 
 

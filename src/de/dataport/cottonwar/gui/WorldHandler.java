@@ -1,8 +1,10 @@
 package de.dataport.cottonwar.gui;
 
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import java.awt.Color;
@@ -26,6 +28,7 @@ import javax.swing.Action;
 
 import de.dataport.cottonwar.objekte.Einheit;
 import de.dataport.cottonwar.objekte.Spielfeld;
+import de.dataport.cottonwar.savegame.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -43,12 +46,12 @@ public class WorldHandler extends JFrame implements KeyListener {
 
 	World w;
 	JPanel spielfeld;
-	public static int gold;
-	public static int gold2;
-	public static int exp2;
-	public static int exp;
-	public static int lp;
-	public static int lp2;
+	public static int gold = 100;
+	public static int gold2 = 100;
+	public static int exp2 = 0;
+	public static int exp = 0;
+	public static int lp = 1000;
+	public static int lp2 = 1000;
 
 	public static boolean evolution1 = false;
 	public static boolean evolution2 = false;
@@ -70,11 +73,6 @@ public class WorldHandler extends JFrame implements KeyListener {
 		
 		addKeyListener(this);
 		this.requestFocusInWindow();
-		gold = 100;
-		gold2 = 100;
-		exp2 = 0;
-		exp = 0;
-		
 		
 		w.add(spielfeld);
 
@@ -116,6 +114,20 @@ public class WorldHandler extends JFrame implements KeyListener {
 		evo2.setBounds(1036,176,107,14);
 		evo2.setForeground(Color.yellow);
 		w.add(evo2);
+		
+		JButton btnSave = new JButton("Save");
+		btnSave.setBounds(237, 11, 62, 23);
+		w.add(btnSave);
+		btnSave.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Main.speichern();
+				Object[] options = { "OK" };
+				JOptionPane.showOptionDialog(null, "Ihr Spiel wurde gespeichert!", "Speichern", JOptionPane.DEFAULT_OPTION,
+						JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+				
+			}
+		});
 
 		Timer timer = new Timer(1, new ActionListener() {
 			@Override

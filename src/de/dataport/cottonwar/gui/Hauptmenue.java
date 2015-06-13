@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import de.dataport.cottonwar.objekte.Spielfeld;
+import de.dataport.cottonwar.savegame.Main;
 
 public class Hauptmenue extends JFrame implements ActionListener {
 
@@ -78,15 +79,11 @@ public class Hauptmenue extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == schliessen) {
+
 			fenster();
 			this.dispose();
 		}
 
-		if (e.getSource() == spielladen) {
-			Object[] options = { "OK" };
-			JOptionPane.showOptionDialog(null, "Hier werden später Spiele geladen", "Laden...", JOptionPane.DEFAULT_OPTION,
-					JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-		}
 
 		if (e.getSource() == einheiten) {
 			Object[] options = { "OK" };
@@ -114,6 +111,13 @@ public class Hauptmenue extends JFrame implements ActionListener {
 			System.exit(0);
 			;
 
+		}
+		
+		if (e.getSource() == spielladen) {
+			fenster();
+			Main.laden();
+			
+			this.dispose();
 		}
 
 	}
