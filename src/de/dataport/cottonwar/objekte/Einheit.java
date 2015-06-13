@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -16,6 +17,10 @@ public class Einheit implements Runnable {
 
 	public static List<Einheit> einheiten2 = new ArrayList<Einheit>();
 
+	public int getLp() {
+		return lp;
+	}
+	
 	public int getX() {
 		return x;
 	}
@@ -79,49 +84,49 @@ public class Einheit implements Runnable {
 		this.width = width;
 		this.speed = speed;
 		this.spd = spd;
-		
-		if (name.equals("Krieger1")) {
-			this.image = Spielfeld.base;
+
+		if (name.equals("Basis1")) {
+			this.image = Spielfeld.Basis0;
 		}
 		if (name.equals("Basis2")) {
-			this.image = Spielfeld.base;
+			this.image = Spielfeld.Basis;
 		}
-//		if (name.equals("Krieger1")) {
-//			this.image = Spielfeld.ant;
-//		}
-//		if (name.equals("Krieger2")) {
-//			this.image = Spielfeld.base;
-//		}
-//		if (name.equals("Ritter1")) {
-//			this.image = Spielfeld.ant;
-//		}
-//		if (name.equals("Ritter2")) {
-//			this.image = Spielfeld.base;
-//		}
-//		if (name.equals("Reiter1")) {
-//			this.image = Spielfeld.ant;
-//		}
-//		if (name.equals("Reiter2")) {
-//			this.image = Spielfeld.base;
-//		}
-//		if (name.equals("Lord1")) {
-//			this.image = Spielfeld.ant;
-//		}
-//		if (name.equals("Lord2")) {
-//			this.image = Spielfeld.base;
-//		}
-//		if (name.equals("Drache1")) {
-//			this.image = Spielfeld.base;
-//		}
-//		if (name.equals("Drache2")) {
-//			this.image = Spielfeld.base;
-//		}
-//		if (name.equals("Himmelswache1")) {
-//			this.image = Spielfeld.base;
-//		}
-//		if (name.equals("Himmelswache2")) {
-//			this.image = Spielfeld.base;
-//		}
+		if (name.equals("Krieger1")) {
+			this.image = Spielfeld.Krieger0;
+		}
+		if (name.equals("Krieger2")) {
+			this.image = Spielfeld.Krieger;
+		}
+		if (name.equals("Ritter1")) {
+			this.image = Spielfeld.Ritter0;
+		}
+		if (name.equals("Ritter2")) {
+			this.image = Spielfeld.Ritter;
+		}
+		if (name.equals("Reiter1")) {
+			this.image = Spielfeld.Reiter0;
+		}
+		if (name.equals("Reiter2")) {
+			this.image = Spielfeld.Reiter;
+		}
+		if (name.equals("Lord1")) {
+			this.image = Spielfeld.Lord0;
+		}
+		if (name.equals("Lord2")) {
+			this.image = Spielfeld.Lord;
+		}
+		if (name.equals("Drache1")) {
+			this.image = Spielfeld.Drache0;
+		}
+		if (name.equals("Drache2")) {
+			this.image = Spielfeld.Drache;
+		}
+		if (name.equals("Himmelswache1")) {
+			this.image = Spielfeld.Himmelswacht0;
+		}
+		if (name.equals("Himmelswache2")) {
+			this.image = Spielfeld.Himmelswacht;
+		}
 		
 
 	}
@@ -144,7 +149,7 @@ public class Einheit implements Runnable {
 		boolean stop = false;
 		Einheit s = null;
 		while (!stop) {
-			if (this.name == "Basis") {
+			if (this.name == "Basis1" || this.name == "Basis2") {
 			break;
 		}
 			synchronized (einheiten) {
@@ -206,11 +211,35 @@ public class Einheit implements Runnable {
 				WorldHandler.exp = WorldHandler.exp + e.ep;
 				WorldHandler.gold = WorldHandler.gold + e.gold;
 				einheiten.remove(e);
+				if (e.name == "Basis2") {
+					Object[] options = { "OK" };
+					JOptionPane.showOptionDialog(null, "Spieler 1 hat das Spiel gewonnen!", "Glückwunsch", JOptionPane.DEFAULT_OPTION,
+							JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					System.exit(0);
+				}
 				return false;
 			} else {
 				WorldHandler.exp2 = WorldHandler.exp2 + e.ep;
-				WorldHandler.gold2 = WorldHandler.exp + e.gold;
+				WorldHandler.gold2 = WorldHandler.gold2 + e.gold;
 				einheiten2.remove(e);
+				if (e.name == "Basis1") {
+					Object[] options = { "OK" };
+					JOptionPane.showOptionDialog(null, "Spieler 2 hat das Spiel gewonnen!", "Glückwunsch", JOptionPane.DEFAULT_OPTION,
+							JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					System.exit(0);
+				}
 				return false;
 			}
 		}
@@ -249,7 +278,7 @@ public class Einheit implements Runnable {
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
 
-				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 90);
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 400);
 
 				if (me.intersects(enemy)) {
 					// angreifen(e);
@@ -259,7 +288,7 @@ public class Einheit implements Runnable {
 			enemies = einheiten2;
 			for (Einheit k : enemies) {
 
-				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 90);
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 400);
 
 				if (me.intersects(freund) && k.x != x && k.x > x) {
 					if (k.name == "Basis")
@@ -272,18 +301,28 @@ public class Einheit implements Runnable {
 			enemies = einheiten2;
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
+				
+				Rectangle enemybase = new Rectangle(e.x,e.y,120,400);
+				
 
-				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 90);
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 400);
+				
+				
 
 				if (me.intersects(enemy)) {
 					// angreifen(e);
 					return true;
 				}
+				if (me.intersects(enemybase)) {
+					if (e.name == "Basis1") {
+						return true;
+					}
+				}
 			}
 			enemies = einheiten;
 			for (Einheit k : enemies) {
 
-				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 90);
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 400);
 
 				if (me.intersects(freund) && k.x != x && k.x < x) {
 					if (k.name =="Basis") {
@@ -306,7 +345,7 @@ public class Einheit implements Runnable {
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
 
-				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 90);
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 400);
 
 				if (me.intersects(enemy)) {
 					return (e);
@@ -315,7 +354,7 @@ public class Einheit implements Runnable {
 			enemies = einheiten2;
 			for (Einheit k : enemies) {
 
-				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 90);
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 400);
 
 				if (me.intersects(freund) && k.x != x && k.x > x) {
 					if (k.name == "Basis") {
@@ -330,7 +369,7 @@ public class Einheit implements Runnable {
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
 
-				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 90);
+				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 400);
 
 				if (me.intersects(enemy)) {
 					return (e);
@@ -339,7 +378,7 @@ public class Einheit implements Runnable {
 			enemies = einheiten;
 			for (Einheit k : enemies) {
 
-				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 90);
+				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 400);
 
 				if (me.intersects(freund) && k.x != x && k.x < x) {
 					if (k.name == "Basis") {

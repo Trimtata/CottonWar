@@ -57,10 +57,14 @@ public class World extends JPanel implements ActionListener{
 
 	
 	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(Spielfeld.backgroundw,0, 0, 1200, 700, null);
+	}
 	
-//	public void create(){
-//
-//		Graphics g = this.getGraphics();
-//		g.drawImage(a.i, a.x, a.y, 200, 300, null);
-//	}
+	
+	public void create(){
+
+	}
 }
