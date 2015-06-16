@@ -47,8 +47,8 @@ public class WorldHandler extends JFrame implements KeyListener {
 	
 	World w;
 	JPanel spielfeld;
-	public static int gold = 100;
-	public static int gold2 = 100;
+	public static int gold = 25;
+	public static int gold2 = 25;
 	public static int exp2 = 0;
 	public static int exp = 0;
 	public static int lp = 1000;
@@ -62,6 +62,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 
 	public WorldHandler() {
 		this.setSize(1210, 740);
+		this.setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		setLocationRelativeTo(null);
@@ -72,6 +73,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		setContentPane(w);
 		getContentPane().setLayout(null);
 		w.setLayout(null);
+		spielfeld.setLayout(null);
 		
 		addKeyListener(this);
 		this.requestFocusInWindow();
@@ -116,6 +118,14 @@ public class WorldHandler extends JFrame implements KeyListener {
 		evo2.setBounds(1036,176,107,14);
 		evo2.setForeground(Color.yellow);
 		w.add(evo2);
+		final JLabel hp1 = new JLabel("1000");
+		final JLabel hp2 = new JLabel("1000");
+		hp1.setBounds(10,0,40,40);
+		hp2.setBounds(1074,0,40,40);
+		hp1.setForeground(Color.red);
+		hp2.setForeground(Color.red);
+		spielfeld.add(hp1);
+		spielfeld.add(hp2);
 		
 		btnSave = new JButton("Speichern & Schließen");
 		btnSave.setBounds(179, 11, 167, 23);
@@ -142,22 +152,25 @@ public class WorldHandler extends JFrame implements KeyListener {
 		});
 		timer.start();
 
-		Timer timer2 = new Timer(1600, new ActionListener() {
+		Timer timer2 = new Timer(1300, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gold = gold + 1;
 				gold2 = gold2 + 1;
+				
 				lp = basis1.getLp();
 				lp2 = basis2.getLp();
+				hp1.setText(basis1.getLp()+ "");
+				hp2.setText(basis2.getLp()+ "");
 				r.setText(gold + "");
 				r2.setText(gold2 + "");
 				ex1.setText(exp + "");
 				ex2.setText(exp2 + "");
 				if (evolution1 == true) {
-					ex1.setText("Fortschrittlich");
+					evo1.setText("Fortschrittlich");
 				}
 				if (evolution2 == true) {
-					ex2.setText("Fortschrttlich");
+					evo2.setText("Fortschrttlich");
 				}
 				
 				
@@ -200,7 +213,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 	public void keyPressed(KeyEvent s) {
 		if (s.getKeyChar() == 'q') {
 			if (gold >= 10) {
-				Einheit e = new Einheit("Krieger1", 100, 20, 0, 15, 50, 10, 0, -20, 150, 128, 128, 20, 1000);
+				Einheit e = new Einheit("Krieger1", 100, 20, 0, 2, 100, 10, 0, -20, 150, 128, 128, 20, 1100);
 				gold = gold - e.getCost();
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
@@ -209,7 +222,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		}
 		if (s.getKeyChar() == 'w') {
 			if (gold >= 15) {
-				Einheit e = new Einheit("Ritter1", 200, 12, 0, 20, 100, 15, 0, 10, 150, 128, 128, 30, 1000);
+				Einheit e = new Einheit("Ritter1", 200, 15, 0, 7, 200, 15, 0, 10, 150, 128, 128, 40, 1000);
 				gold = gold - e.getCost();
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
@@ -218,7 +231,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		}
 		if (s.getKeyChar() == 'e') {
 			if (gold >= 25) {
-				Einheit e = new Einheit("Reiter1", 80, 20, 0, 30, 120, 25, 0, 10, 150, 128, 128, 10, 1000);
+				Einheit e = new Einheit("Reiter1", 160, 35, 0, 12, 250, 25, 0, 10, 150, 128, 128, 10, 1000);
 				gold = gold - e.getCost();
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
@@ -228,7 +241,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		if (s.getKeyChar() == 'a') {
 			if (evolution2==true){
 			if (gold >= 40) {
-				Einheit e = new Einheit("Lord1", 160, 30, 0, 45, 200, 40, 0, 10, 150, 128, 128, 30, 800);
+				Einheit e = new Einheit("Lord1", 160, 30, 0, 20, 200, 40, 0, 10, 150, 128, 128, 30, 800);
 				gold = gold - e.getCost();
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
@@ -241,7 +254,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		if (s.getKeyChar() == 's') {
 			if (evolution2==true){
 			if (gold >= 45) {
-				Einheit e = new Einheit("Drache1", 250, 40, 0, 50, 300, 45, 0, 10, 150, 128, 128, 20, 3000);
+				Einheit e = new Einheit("Drache1", 250, 40, 0, 25, 300, 45, 0, 10, 150, 128, 128, 5, 700);
 				gold = gold - e.getCost();
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
@@ -254,7 +267,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		if (s.getKeyChar() == 'd') {
 			if (evolution1==true){
 			if (gold >= 140) {
-				Einheit e = new Einheit("Himmelswacht1", 400, 55, 0, 150, 400, 140, 0, 10, 150, 128, 128, 50, 4000);
+				Einheit e = new Einheit("Himmelswacht1", 400, 70, 0, 30, 400, 140, 0, 10, 150, 128, 128, 50, 900);
 				gold = gold - e.getCost();
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
@@ -273,7 +286,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		}
 		if (s.getKeyChar() == 'i') {
 			if (gold2 >= 10) {
-				Einheit e = new Einheit("Krieger2", 80, 20, 0, 15, 50, 10, 1, 890, 150, 128, 128, 20, 1000);
+				Einheit e = new Einheit("Krieger2", 80, 20, 0, 2, 100, 10, 1, 890, 150, 128, 128, 20, 1100);
 				gold2 = gold2 - e.getCost();
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
@@ -282,7 +295,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		}
 		if (s.getKeyChar() == 'o') {
 			if (gold2 >= 15) {
-				Einheit e = new Einheit("Ritter2", 200, 12, 0, 20, 100, 15, 1, 890, 150, 128, 128, 30, 1000);
+				Einheit e = new Einheit("Ritter2", 200, 15, 0, 7, 200, 15, 1, 890, 150, 128, 128, 40, 1000);
 				gold2 = gold2 - e.getCost();
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
@@ -291,7 +304,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		}
 		if (s.getKeyChar() == 'p') {
 			if (gold2 >= 25) {
-				Einheit e = new Einheit("Reiter2", 100, 20, 0, 30, 120, 25, 1, 890, 150, 128, 128, 10, 1000);
+				Einheit e = new Einheit("Reiter2", 160, 35, 0, 12, 250, 25, 1, 890, 150, 128, 128, 10, 1000);
 				gold2 = gold2 - e.getCost();
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
@@ -301,7 +314,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		if (s.getKeyChar() == 'j') {
 			if (evolution2==true){
 			if (gold2 >= 40) {
-				Einheit e = new Einheit("Lord2", 160, 30, 0, 45, 200, 40, 1, 890, 150, 128, 128, 30, 800);
+				Einheit e = new Einheit("Lord2", 160, 30, 0, 20, 200, 40, 1, 890, 150, 128, 128, 30, 800);
 				gold2 = gold2 - e.getCost();
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
@@ -314,7 +327,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		if (s.getKeyChar() == 'k') {
 			if (evolution2==true){
 			if (gold2 >= 45) {
-				Einheit e = new Einheit("Drache2", 250, 40, 0, 50, 300, 45, 1, 890, 150, 128, 128, 20, 3000);
+				Einheit e = new Einheit("Drache2", 250, 40, 0, 25, 300, 45, 1, 890, 150, 128, 128, 5, 700);
 				gold2 = gold2 - e.getCost();
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
@@ -327,7 +340,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		if (s.getKeyChar() == 'l') {
 			if (evolution2==true){
 			if (gold2 >= 140) {
-				Einheit e = new Einheit("Himmelswacht2", 400, 55, 0, 150, 400, 140, 1, 890, 150, 128, 128, 50, 4000);
+				Einheit e = new Einheit("Himmelswacht2", 400, 70, 0, 30, 400, 140, 1, 890, 150, 128, 128, 50, 900);
 				gold2 = gold2 - e.getCost();
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
