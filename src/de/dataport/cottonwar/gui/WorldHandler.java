@@ -213,7 +213,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 	public void keyPressed(KeyEvent s) {
 		if (s.getKeyChar() == 'q') {
 			if (gold >= 10) {
-				Einheit e = new Einheit("Krieger1", 100, 20, 0, 2, 100, 10, 0, -20, 150, 128, 128, 20, 1100);
+				Einheit e = new Einheit("Krieger1", 100, 20, 0, 2, 150, 10, 0, -20, 150, 128, 128, 20, 1100);
 				gold = gold - e.getCost();
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
@@ -222,7 +222,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		}
 		if (s.getKeyChar() == 'w') {
 			if (gold >= 15) {
-				Einheit e = new Einheit("Ritter1", 200, 15, 0, 7, 200, 15, 0, 10, 150, 128, 128, 40, 1000);
+				Einheit e = new Einheit("Ritter1", 200, 15, 0, 7, 250, 15, 0, 10, 150, 128, 128, 40, 1000);
 				gold = gold - e.getCost();
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
@@ -231,7 +231,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		}
 		if (s.getKeyChar() == 'e') {
 			if (gold >= 25) {
-				Einheit e = new Einheit("Reiter1", 160, 35, 0, 12, 250, 25, 0, 10, 150, 128, 128, 10, 1000);
+				Einheit e = new Einheit("Reiter1", 160, 35, 0, 12, 300, 25, 0, 10, 150, 128, 128, 10, 1000);
 				gold = gold - e.getCost();
 				Einheit.einheiten2.add(e);
 				e.setSpielfeld(spielfeld);
@@ -286,7 +286,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		}
 		if (s.getKeyChar() == 'i') {
 			if (gold2 >= 10) {
-				Einheit e = new Einheit("Krieger2", 80, 20, 0, 2, 100, 10, 1, 890, 150, 128, 128, 20, 1100);
+				Einheit e = new Einheit("Krieger2", 80, 20, 0, 2, 150, 10, 1, 890, 150, 128, 128, 20, 1100);
 				gold2 = gold2 - e.getCost();
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
@@ -295,7 +295,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		}
 		if (s.getKeyChar() == 'o') {
 			if (gold2 >= 15) {
-				Einheit e = new Einheit("Ritter2", 200, 15, 0, 7, 200, 15, 1, 890, 150, 128, 128, 40, 1000);
+				Einheit e = new Einheit("Ritter2", 200, 15, 0, 7, 250, 15, 1, 890, 150, 128, 128, 40, 1000);
 				gold2 = gold2 - e.getCost();
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);
@@ -304,7 +304,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 		}
 		if (s.getKeyChar() == 'p') {
 			if (gold2 >= 25) {
-				Einheit e = new Einheit("Reiter2", 160, 35, 0, 12, 250, 25, 1, 890, 150, 128, 128, 10, 1000);
+				Einheit e = new Einheit("Reiter2", 160, 35, 0, 12, 300, 25, 1, 890, 150, 128, 128, 10, 1000);
 				gold2 = gold2 - e.getCost();
 				Einheit.einheiten.add(e);
 				e.setSpielfeld(spielfeld);

@@ -143,7 +143,7 @@ public class Einheit implements Runnable {
 		this.spielfeld = spielfeld;
 	}
 
-	boolean hasStopped;
+//	boolean hasStopped;
 
 	@Override
 	public void run() {
@@ -166,7 +166,7 @@ public class Einheit implements Runnable {
 //				
 //				System.out.println("stopped");
 				
-				hasStopped = true;
+//				hasStopped = true;
 				sleep();
 				continue;
 			}
@@ -180,6 +180,10 @@ public class Einheit implements Runnable {
 				if (stop == true) {
 					break;
 				}
+			}
+			if (s == null && stop == true) {
+				stop = false;
+				continue;
 			}
 			sleep();
 		}
