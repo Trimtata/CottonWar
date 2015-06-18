@@ -224,7 +224,6 @@ public class WorldHandler extends JFrame implements KeyListener {
 		Timer timer = new Timer(1, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				if (remoteGame && RMIClient.client != null) {
 					try {
 						LpGoldExp s = RMIClient.stub.getLpGoldExp();
@@ -235,6 +234,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 					}
 
 				}
+				
 
 				spielfeld.repaint();
 			}
@@ -244,12 +244,15 @@ public class WorldHandler extends JFrame implements KeyListener {
 		Timer timer2 = new Timer(2000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				
 				gold = gold + 1;
 				gold2 = gold2 + 1;
 
 				lp = basis1.getLp();
 				lp2 = basis2.getLp();
-				hp1.setText(lp + " " + (remoteGame ? (RMIClient.client != null ? "client" : "server") : ""));
+				hp1.setText(lp + " " + (remoteGame ? (RMIClient.client != null ? "Client" : "Server") : ""));
 				hp2.setText(lp2 + "");
 				r.setText(gold + "");
 				r2.setText(gold2 + "");
@@ -259,7 +262,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 					evo1.setText("Fortschrittlich");
 				}
 				if (evolution2 == true) {
-					evo2.setText("Fortschrttlich");
+					evo2.setText("Fortschrittlich");
 				}
 
 				setGold(gold);
@@ -500,10 +503,38 @@ public class WorldHandler extends JFrame implements KeyListener {
 		}
 	}
 
+	public void createEvolution(boolean firstPlayer) {
+		if (remoteGame && RMIClient.client != null) {
+			// Only client executes this block
+			try {
+				RMIClient.stub.createEvolution();
+				return;
+			} catch (RemoteException e) {
+				e.printStackTrace();
+				System.exit(0);
+			}
+		}
+
+		if (firstPlayer) {
+			if (evolution1 == false && exp >= 5000) {
+				evolution1 = true;
+			} else {
+
+			}
+		}
+		if (!firstPlayer) {
+			if (evolution2 == false && exp2 >= 5000) {
+				evolution2 = true;
+			} else {
+
+			}
+		}
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent s) {
 		if (s.getKeyChar() == 'q') {
-			createKrieger(RMIClient.client == null);
+			createKrieger(remoteGame);
 		}
 		if (s.getKeyChar() == 'w') {
 			createRitter(remoteGame);
@@ -521,11 +552,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 			createHimmelswacht(remoteGame);
 		}
 		if (s.getKeyChar() == 'x') {
-			if (evolution1 == false && exp >= 5000) {
-				evolution1 = true;
-			} else {
-
-			}
+			createEvolution(remoteGame);
 		}
 		if (s.getKeyChar() == 'i') {
 			createKrieger(remoteGame);
@@ -546,11 +573,7 @@ public class WorldHandler extends JFrame implements KeyListener {
 			createHimmelswacht(remoteGame);
 		}
 		if (s.getKeyChar() == 'm') {
-			if (evolution2 == false && exp2 >= 5000) {
-				evolution2 = true;
-			} else {
-
-			}
+			createEvolution(remoteGame);
 		}
 
 		// Per "g" kann der Service gestartet werden und per "f" können die

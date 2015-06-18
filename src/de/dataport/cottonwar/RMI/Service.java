@@ -83,4 +83,10 @@ public class Service implements ServiceInterface {
 		
 	}
 
+	@Override
+	public void createEvolution() throws RemoteException {
+		WorldHandler.instance.createEvolution(false);
+		
+	}
+
 }

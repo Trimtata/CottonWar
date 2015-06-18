@@ -18,6 +18,8 @@ public interface ServiceInterface extends Remote {
 	void createLord()throws RemoteException;
 
 	void createDrache()throws RemoteException;
+
+	void createEvolution()throws RemoteException;
 	
 
 }

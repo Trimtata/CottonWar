@@ -92,7 +92,7 @@ public class Einheit implements Runnable, Serializable {
 
 		loadImage();
 	}
-	
+
 	public void loadImage() {
 		if (name.equals("Basis1")) {
 			this.image = Spielfeld.Basis0;
@@ -135,7 +135,7 @@ public class Einheit implements Runnable, Serializable {
 		}
 		if (name.equals("Himmelswacht2")) {
 			this.image = Spielfeld.Himmelswacht;
-		}		
+		}
 	}
 
 	static JPanel spielfeld;
@@ -227,8 +227,13 @@ public class Einheit implements Runnable, Serializable {
 
 		if (lp > e.lp) {
 			if (id == 0) {
-				WorldHandler.exp = WorldHandler.exp + e.ep;
-				WorldHandler.gold = WorldHandler.gold + e.gold;
+				if (WorldHandler.instance.remoteGame) {
+					WorldHandler.exp = WorldHandler.exp + e.ep / 2;
+					WorldHandler.gold = WorldHandler.gold + e.gold / 2;
+				} else {
+					WorldHandler.exp = WorldHandler.exp + e.ep;
+					WorldHandler.gold = WorldHandler.gold + e.gold;
+				}
 				einheiten.remove(e);
 				if (e.name == "Basis2") {
 					Object[] options = { "OK" };
@@ -239,8 +244,13 @@ public class Einheit implements Runnable, Serializable {
 				}
 				return false;
 			} else {
-				WorldHandler.exp2 = WorldHandler.exp2 + e.ep;
-				WorldHandler.gold2 = WorldHandler.gold2 + e.gold;
+				if (WorldHandler.instance.remoteGame) {
+					WorldHandler.exp2 = WorldHandler.exp2 + e.ep / 2;
+					WorldHandler.gold2 = WorldHandler.gold2 + e.gold / 2;
+				} else {
+					WorldHandler.exp2 = WorldHandler.exp2 + e.ep;
+					WorldHandler.gold2 = WorldHandler.gold2 + e.gold;
+				}
 				einheiten2.remove(e);
 				if (e.name == "Basis1") {
 					Object[] options = { "OK" };
