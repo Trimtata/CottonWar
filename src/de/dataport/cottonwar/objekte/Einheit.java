@@ -2,6 +2,7 @@ package de.dataport.cottonwar.objekte;
 
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -12,7 +13,7 @@ import javax.swing.Timer;
 
 import de.dataport.cottonwar.gui.WorldHandler;
 
-public class Einheit implements Runnable {
+public class Einheit implements Runnable, Serializable {
 
 	public static List<Einheit> einheiten = new ArrayList<Einheit>();
 
@@ -21,10 +22,11 @@ public class Einheit implements Runnable {
 	public int getLp() {
 		return lp;
 	}
-	
+
 	public int getX() {
 		return x;
 	}
+
 	public int getCost() {
 		return cost;
 	}
@@ -62,11 +64,11 @@ public class Einheit implements Runnable {
 	}
 
 	String name;
-	int lp, ap, spd, range, gold, ep, cost, id, x, y, height, width,
-			speed = 10;
-	Timer timer;
-	Timer timer2;
-	public Image image;
+	int lp, ap, spd, range, gold, ep, cost, id, x, y, height, width, speed = 10;
+
+	public transient Image image;
+
+	public int lpMax;
 
 	public Einheit(String name, int lp, int ap, int range, int gold, int ep, int cost, int id, int x, int y, int height, int width,
 			int speed, int spd) {
@@ -74,6 +76,7 @@ public class Einheit implements Runnable {
 
 		this.name = name;
 		this.lp = lp;
+		this.lpMax = lp;
 		this.ap = ap;
 		this.range = range;
 		this.gold = gold;
@@ -87,6 +90,10 @@ public class Einheit implements Runnable {
 		this.speed = speed;
 		this.spd = spd;
 
+		loadImage();
+	}
+
+	public void loadImage() {
 		if (name.equals("Basis1")) {
 			this.image = Spielfeld.Basis0;
 		}
@@ -129,8 +136,6 @@ public class Einheit implements Runnable {
 		if (name.equals("Himmelswacht2")) {
 			this.image = Spielfeld.Himmelswacht;
 		}
-		
-
 	}
 
 	static JPanel spielfeld;
@@ -143,37 +148,38 @@ public class Einheit implements Runnable {
 		this.spielfeld = spielfeld;
 	}
 
-//	boolean hasStopped;
+	// boolean hasStopped;
 
 	@Override
 	public void run() {
-		
+
 		boolean stop = false;
 		Einheit s = null;
 		while (!stop) {
 			if (this.name == "Basis1" || this.name == "Basis2") {
-			break;
-		}
+				break;
+			}
 			synchronized (einheiten) {
 				stop = kollisionstest();
 				s = welchesobjekt();
 			}
-//			if (hasStopped)
-//			System.out.println("coll: " + stop + " " + s + (s != null ? s.id : ""));
-			
+			// if (hasStopped)
+			// System.out.println("coll: " + stop + " " + s + (s != null ? s.id
+			// : ""));
+
 			if (s != null && s.id == id) {
 				stop = false;
-//				
-//				System.out.println("stopped");
-				
-//				hasStopped = true;
+				//
+				// System.out.println("stopped");
+
+				// hasStopped = true;
 				sleep();
 				continue;
 			}
-			
-//			if (hasStopped)
-//				System.out.println("moving a step " + stop);
-			
+
+			// if (hasStopped)
+			// System.out.println("moving a step " + stop);
+
 			x = x + (id == 0 ? 1 : -1);
 			if (s != null && s.id != id) {
 				stop = angreifen(s);
@@ -203,6 +209,12 @@ public class Einheit implements Runnable {
 			if (lp <= 0) {
 				break;
 			}
+			if (e.name == "Basis1") {
+				WorldHandler.gold2 = WorldHandler.gold2 + 5;
+			}
+			if (e.name == "Basis2") {
+				WorldHandler.gold = WorldHandler.gold + 5;
+			}
 
 			e.lp = e.lp - (ap + random());
 
@@ -212,28 +224,39 @@ public class Einheit implements Runnable {
 			}
 
 		}
+
 		if (lp > e.lp) {
 			if (id == 0) {
-				WorldHandler.exp = WorldHandler.exp + e.ep;
-				WorldHandler.gold = WorldHandler.gold + e.gold;
+				if (WorldHandler.instance.remoteGame) {
+					WorldHandler.exp = WorldHandler.exp + e.ep / 2;
+					WorldHandler.gold = WorldHandler.gold + e.gold / 2;
+				} else {
+					WorldHandler.exp = WorldHandler.exp + e.ep;
+					WorldHandler.gold = WorldHandler.gold + e.gold;
+				}
 				einheiten.remove(e);
 				if (e.name == "Basis2") {
 					Object[] options = { "OK" };
 					JOptionPane.showOptionDialog(null, "Spieler 1 hat das Spiel gewonnen!", "Glückwunsch", JOptionPane.DEFAULT_OPTION,
 							JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-					
+
 					System.exit(0);
 				}
 				return false;
 			} else {
-				WorldHandler.exp2 = WorldHandler.exp2 + e.ep;
-				WorldHandler.gold2 = WorldHandler.gold2 + e.gold;
+				if (WorldHandler.instance.remoteGame) {
+					WorldHandler.exp2 = WorldHandler.exp2 + e.ep / 2;
+					WorldHandler.gold2 = WorldHandler.gold2 + e.gold / 2;
+				} else {
+					WorldHandler.exp2 = WorldHandler.exp2 + e.ep;
+					WorldHandler.gold2 = WorldHandler.gold2 + e.gold;
+				}
 				einheiten2.remove(e);
 				if (e.name == "Basis1") {
 					Object[] options = { "OK" };
 					JOptionPane.showOptionDialog(null, "Spieler 2 hat das Spiel gewonnen!", "Glückwunsch", JOptionPane.DEFAULT_OPTION,
 							JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-					
+
 					System.exit(0);
 				}
 				return false;
@@ -246,6 +269,7 @@ public class Einheit implements Runnable {
 	public void ausführen() {
 		WorldHandler.executor.execute(this);
 	}
+
 	public boolean kollisionstest() {
 
 		List<Einheit> enemies = null;
@@ -256,8 +280,6 @@ public class Einheit implements Runnable {
 			for (Einheit e : enemies) {
 
 				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 400);
-
-
 
 				if (me.intersects(enemy)) {
 					return true;
@@ -280,13 +302,10 @@ public class Einheit implements Runnable {
 			enemies = einheiten2;
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
-				
-				Rectangle enemybase = new Rectangle(e.x,e.y,120,400);
-				
+
+				Rectangle enemybase = new Rectangle(e.x, e.y, 120, 400);
 
 				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 400);
-				
-				
 
 				if (me.intersects(enemy)) {
 					return true;
@@ -303,7 +322,7 @@ public class Einheit implements Runnable {
 				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 400);
 
 				if (me.intersects(freund) && k.x != x && k.x < x) {
-					if (k.name =="Basis2") {
+					if (k.name == "Basis2") {
 						return false;
 					}
 					return true;
@@ -346,8 +365,8 @@ public class Einheit implements Runnable {
 			enemies = einheiten2;
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
-				
-				Rectangle enemybase = new Rectangle(e.x,e.y,120,400);
+
+				Rectangle enemybase = new Rectangle(e.x, e.y, 120, 400);
 
 				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 400);
 
@@ -385,6 +404,5 @@ public class Einheit implements Runnable {
 		return zufall;
 
 	}
-
 
 }

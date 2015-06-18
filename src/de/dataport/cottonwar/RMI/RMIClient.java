@@ -6,24 +6,39 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import de.dataport.cottonwar.RMI.*;
+import de.dataport.cottonwar.gui.WorldHandler;
 
 public class RMIClient {
 
+	public static RMIClient client;
+	public static ServiceInterface stub; 
+
 	public static void main(String[] argv) {
-		new RMIClient().start();
+		client = new RMIClient();
+		client.start();
 	}
 
-	void start() {
+	public void start() {
+
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
-			ServiceInterface stub = (ServiceInterface) registry.lookup("Service");
+			stub = (ServiceInterface) registry.lookup("Service");
 
-				LpGoldExp s = stub.getLpGoldExp();
-				System.out.println(s.toString());
-			
-		}
-		catch (RemoteException | NotBoundException ex) {
+			LpGoldExp s = stub.getLpGoldExp();
+			WorldHandler.instance.setWerte(s);
+			WorldHandler.instance.remoteGame = true;
+
+		} catch (RemoteException | NotBoundException ex) {
 			ex.printStackTrace();
 		}
+
 	}
+
+	public static RMIClient getRMIClient() {
+		if (client == null) {
+			client = new RMIClient();
+		}
+		return client;
+	}
+
 }
