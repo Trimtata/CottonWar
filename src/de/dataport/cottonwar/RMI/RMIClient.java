@@ -21,7 +21,7 @@ public class RMIClient {
 	public void start() {
 
 		try {
-			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+			Registry registry = LocateRegistry.getRegistry("169.254.7.55", 80);
 			stub = (ServiceInterface) registry.lookup("Service");
 
 			LpGoldExp s = stub.getLpGoldExp();
