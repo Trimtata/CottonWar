@@ -16,7 +16,7 @@ public class RMIClient {
 	void start() {
 		try {
 			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
-			ServiceInterface stub = (ServiceInterface) registry.lookup("Werte übermitteln...");
+			ServiceInterface stub = (ServiceInterface) registry.lookup("Service");
 
 				LpGoldExp s = stub.getLpGoldExp();
 				System.out.println(s.toString());

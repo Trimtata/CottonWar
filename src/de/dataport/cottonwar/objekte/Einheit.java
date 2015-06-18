@@ -123,10 +123,10 @@ public class Einheit implements Runnable {
 		if (name.equals("Drache2")) {
 			this.image = Spielfeld.Drache;
 		}
-		if (name.equals("Himmelswache1")) {
+		if (name.equals("Himmelswacht1")) {
 			this.image = Spielfeld.Himmelswacht0;
 		}
-		if (name.equals("Himmelswache2")) {
+		if (name.equals("Himmelswacht2")) {
 			this.image = Spielfeld.Himmelswacht;
 		}
 		
@@ -143,7 +143,7 @@ public class Einheit implements Runnable {
 		this.spielfeld = spielfeld;
 	}
 
-	boolean hasStopped;
+//	boolean hasStopped;
 
 	@Override
 	public void run() {
@@ -158,21 +158,21 @@ public class Einheit implements Runnable {
 				stop = kollisionstest();
 				s = welchesobjekt();
 			}
-			if (hasStopped)
-			System.out.println("coll: " + stop + " " + s + (s != null ? s.id : ""));
+//			if (hasStopped)
+//			System.out.println("coll: " + stop + " " + s + (s != null ? s.id : ""));
 			
 			if (s != null && s.id == id) {
 				stop = false;
+//				
+//				System.out.println("stopped");
 				
-				System.out.println("stopped");
-				
-				hasStopped = true;
+//				hasStopped = true;
 				sleep();
 				continue;
 			}
 			
-			if (hasStopped)
-				System.out.println("moving a step " + stop);
+//			if (hasStopped)
+//				System.out.println("moving a step " + stop);
 			
 			x = x + (id == 0 ? 1 : -1);
 			if (s != null && s.id != id) {
@@ -180,6 +180,10 @@ public class Einheit implements Runnable {
 				if (stop == true) {
 					break;
 				}
+			}
+			if (s == null && stop == true) {
+				stop = false;
+				continue;
 			}
 			sleep();
 		}
@@ -242,27 +246,7 @@ public class Einheit implements Runnable {
 	public void ausführen() {
 		WorldHandler.executor.execute(this);
 	}
-
-//	public void zeichnen() {
-//
-//		Timer timer = new Timer(10, new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				Graphics g = spielfeld.getGraphics();
-//
-//				g.setColor(spielfeld.getBackground());
-//				g.fillRect(0, 0, spielfeld.getWidth(), spielfeld.getHeight());
-//
-//			}
-//
-//		});
-//
-//		timer.start();
-//
-//	}
-
-	public synchronized boolean kollisionstest() {
+	public boolean kollisionstest() {
 
 		List<Einheit> enemies = null;
 		if (id == 0) {
@@ -276,7 +260,6 @@ public class Einheit implements Runnable {
 
 
 				if (me.intersects(enemy)) {
-					// angreifen(e);
 					return true;
 				}
 
@@ -287,7 +270,7 @@ public class Einheit implements Runnable {
 				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 400);
 
 				if (me.intersects(freund) && k.x != x && k.x > x) {
-					if (k.name == "Basis")
+					if (k.name == "Basis1")
 						return false;
 					return true;
 				}
@@ -306,7 +289,6 @@ public class Einheit implements Runnable {
 				
 
 				if (me.intersects(enemy)) {
-					// angreifen(e);
 					return true;
 				}
 				if (me.intersects(enemybase)) {
@@ -321,7 +303,7 @@ public class Einheit implements Runnable {
 				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 400);
 
 				if (me.intersects(freund) && k.x != x && k.x < x) {
-					if (k.name =="Basis") {
+					if (k.name =="Basis2") {
 						return false;
 					}
 					return true;
@@ -333,7 +315,7 @@ public class Einheit implements Runnable {
 
 	}
 
-	public synchronized Einheit welchesobjekt() {
+	public Einheit welchesobjekt() {
 
 		List<Einheit> enemies = null;
 		if (id == 0) {
@@ -353,7 +335,7 @@ public class Einheit implements Runnable {
 				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 400);
 
 				if (me.intersects(freund) && k.x != x && k.x > x) {
-					if (k.name == "Basis") {
+					if (k.name == "Basis1") {
 						return null;
 					}
 					return k;
@@ -364,11 +346,18 @@ public class Einheit implements Runnable {
 			enemies = einheiten2;
 			Rectangle me = new Rectangle(x - 64, y, 64, 10);
 			for (Einheit e : enemies) {
+				
+				Rectangle enemybase = new Rectangle(e.x,e.y,120,400);
 
 				Rectangle enemy = new Rectangle(e.x - 64, e.y, 64, 400);
 
 				if (me.intersects(enemy)) {
 					return (e);
+				}
+				if (me.intersects(enemybase)) {
+					if (e.name == "Basis1") {
+						return (e);
+					}
 				}
 			}
 			enemies = einheiten;
@@ -377,7 +366,7 @@ public class Einheit implements Runnable {
 				Rectangle freund = new Rectangle(k.x - 64, k.y, 64, 400);
 
 				if (me.intersects(freund) && k.x != x && k.x < x) {
-					if (k.name == "Basis") {
+					if (k.name == "Basis2") {
 						return null;
 					}
 					return k;

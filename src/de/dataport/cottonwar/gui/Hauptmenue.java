@@ -29,6 +29,7 @@ public class Hauptmenue extends JFrame implements ActionListener {
 		menue.setLayout(null);
 		menue.setLocationRelativeTo(null);
 		menue.setVisible(true);
+		menue.setResizable(false);
 	}
 
 	public Hauptmenue(String title) {
