@@ -10,6 +10,7 @@ import javax.swing.Timer;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.Window;
 
 import javax.swing.Box;
 
@@ -43,7 +44,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 public class WorldHandler extends JFrame implements KeyListener {
-
+	
 	World w;
 	JPanel spielfeld;
 	public static int gold = 100;
@@ -52,14 +53,15 @@ public class WorldHandler extends JFrame implements KeyListener {
 	public static int exp = 0;
 	public static int lp = 1000;
 	public static int lp2 = 1000;
-
+	JButton btnSave = new JButton();
+	
 	public static boolean evolution1 = false;
 	public static boolean evolution2 = false;
 
 	public static ExecutorService executor = Executors.newCachedThreadPool();
 
 	public WorldHandler() {
-		setSize(1210, 740);
+		this.setSize(1210, 740);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		setLocationRelativeTo(null);
@@ -115,8 +117,8 @@ public class WorldHandler extends JFrame implements KeyListener {
 		evo2.setForeground(Color.yellow);
 		w.add(evo2);
 		
-		JButton btnSave = new JButton("Save");
-		btnSave.setBounds(237, 11, 62, 23);
+		btnSave = new JButton("Speichern & Schlieﬂen");
+		btnSave.setBounds(179, 11, 167, 23);
 		w.add(btnSave);
 		btnSave.addMouseListener(new MouseAdapter() {
 			@Override
@@ -125,6 +127,9 @@ public class WorldHandler extends JFrame implements KeyListener {
 				Object[] options = { "OK" };
 				JOptionPane.showOptionDialog(null, "Ihr Spiel wurde gespeichert!", "Speichern", JOptionPane.DEFAULT_OPTION,
 						JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+				 
+				System.exit(0);
+				
 				
 			}
 		});
@@ -154,6 +159,8 @@ public class WorldHandler extends JFrame implements KeyListener {
 				if (evolution2 == true) {
 					ex2.setText("Fortschrttlich");
 				}
+				
+				
 			}
 		});
 		timer2.start();
@@ -339,6 +346,8 @@ public class WorldHandler extends JFrame implements KeyListener {
 		}
 	}
 
+	
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub

@@ -158,21 +158,21 @@ public class Einheit implements Runnable {
 				stop = kollisionstest();
 				s = welchesobjekt();
 			}
-//			if (hasStopped)
-//				System.out.println("coll: " + stop + " " + s + (s != null ? s.id : ""));
+			if (hasStopped)
+			System.out.println("coll: " + stop + " " + s + (s != null ? s.id : ""));
 			
 			if (s != null && s.id == id) {
 				stop = false;
 				
-//				System.out.println("stopped");
+				System.out.println("stopped");
 				
-//				hasStopped = true;
+				hasStopped = true;
 				sleep();
 				continue;
 			}
 			
-//			if (hasStopped)
-//				System.out.println("moving a step " + stop);
+			if (hasStopped)
+				System.out.println("moving a step " + stop);
 			
 			x = x + (id == 0 ? 1 : -1);
 			if (s != null && s.id != id) {
@@ -217,11 +217,7 @@ public class Einheit implements Runnable {
 					Object[] options = { "OK" };
 					JOptionPane.showOptionDialog(null, "Spieler 1 hat das Spiel gewonnen!", "Glückwunsch", JOptionPane.DEFAULT_OPTION,
 							JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-					try {
-						Thread.sleep(3000);
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
+					
 					System.exit(0);
 				}
 				return false;
@@ -233,11 +229,7 @@ public class Einheit implements Runnable {
 					Object[] options = { "OK" };
 					JOptionPane.showOptionDialog(null, "Spieler 2 hat das Spiel gewonnen!", "Glückwunsch", JOptionPane.DEFAULT_OPTION,
 							JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-					try {
-						Thread.sleep(3000);
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
+					
 					System.exit(0);
 				}
 				return false;
@@ -270,7 +262,7 @@ public class Einheit implements Runnable {
 //
 //	}
 
-	public boolean kollisionstest() {
+	public synchronized boolean kollisionstest() {
 
 		List<Einheit> enemies = null;
 		if (id == 0) {
@@ -341,7 +333,7 @@ public class Einheit implements Runnable {
 
 	}
 
-	public Einheit welchesobjekt() {
+	public synchronized Einheit welchesobjekt() {
 
 		List<Einheit> enemies = null;
 		if (id == 0) {
