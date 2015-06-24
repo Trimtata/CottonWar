@@ -541,7 +541,11 @@ public class WorldHandler extends JFrame implements KeyListener {
 			}
 		}
 		if (s.getKeyChar() == 'x') {
+			if (remoteGame == false) {
+				createEvolution(!remoteGame);
+			}else {
 			createEvolution(remoteGame);
+			}
 		}
 		if (s.getKeyChar() == 'i') {
 			createKrieger(remoteGame);
