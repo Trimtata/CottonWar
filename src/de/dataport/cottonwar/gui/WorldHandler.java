@@ -32,12 +32,12 @@ public class WorldHandler extends JFrame implements KeyListener {
 	World w;
 	public static WorldHandler instance;
 	JPanel spielfeld;
-	public static Integer gold;
-	public static int gold2;
-	public static int exp2;
-	public static int exp;
-	public static int lp;
-	public static int lp2;
+	public static Integer gold = 25;
+	public static int gold2 = 25;
+	public static int exp2 = 0;
+	public static int exp = 0;
+	public static int lp = 1000;
+	public static int lp2 = 1000;
 	public boolean remoteGame = false;
 	JButton btnSave = new JButton();
 
@@ -134,13 +134,6 @@ public class WorldHandler extends JFrame implements KeyListener {
 
 		w.add(spielfeld);
 
-		gold = 25;
-		gold2 = 25;
-		exp2 = 0;
-		exp = 0;
-		lp = 1000;
-		lp2 = 1000;
-
 		final Einheit basis1 = new Einheit("Basis1", 1000, 12, 0, 9000, 12000, 0, 0, -20, 50, 300, 300, 0, 1500);
 
 		Einheit.einheiten2.add(basis1);
@@ -222,16 +215,15 @@ public class WorldHandler extends JFrame implements KeyListener {
 		});
 		timer.start();
 
-		Timer timer2 = new Timer(1200, new ActionListener() {
+		Timer timer2 = new Timer(2000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				gold = gold + 2;
+				gold2 = gold2 + 2;
 				if (remoteGame == true) {
-					gold = gold + 1;
-					gold2 = gold2 + 1;
-				}else {
-					gold = gold +2;
-					gold2 = gold2 +2;
+					gold = gold - 1;
+					gold2 = gold2 - 1;
 				}
 				lp = basis1.getLp();
 				lp2 = basis2.getLp();

@@ -146,7 +146,6 @@ public class Einheit implements Runnable, Serializable {
 		this.spielfeld = spielfeld;
 	}
 
-	// boolean hasStopped;
 
 	@Override
 	public void run() {
@@ -161,23 +160,11 @@ public class Einheit implements Runnable, Serializable {
 				stop = kollisionstest();
 				s = welchesobjekt();
 			}
-			// if (hasStopped)
-			// System.out.println("coll: " + stop + " " + s + (s != null ? s.id
-			// : ""));
-
 			if (s != null && s.id == id) {
 				stop = false;
-				//
-				// System.out.println("stopped");
-
-				// hasStopped = true;
 				sleep();
 				continue;
 			}
-
-			// if (hasStopped)
-			// System.out.println("moving a step " + stop);
-
 			x = x + (id == 0 ? 1 : -1);
 			if (s != null && s.id != id) {
 				stop = angreifen(s);
