@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import de.dataport.cottonwar.RMI.*;
 import de.dataport.cottonwar.gui.WorldHandler;
 
 public class RMIClient {

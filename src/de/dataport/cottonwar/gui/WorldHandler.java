@@ -2,30 +2,13 @@ package de.dataport.cottonwar.gui;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Window;
-
-import javax.swing.Box;
-
-import java.awt.BorderLayout;
-
-import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.AbstractAction;
-
 import java.awt.event.ActionEvent;
-
-import javax.swing.Action;
-
 import de.dataport.cottonwar.RMI.LpGoldExp;
 import de.dataport.cottonwar.RMI.RMIClient;
 import de.dataport.cottonwar.RMI.Service;
@@ -34,7 +17,6 @@ import de.dataport.cottonwar.objekte.Spielfeld;
 import de.dataport.cottonwar.savegame.*;
 
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -43,7 +25,6 @@ import java.rmi.RemoteException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 public class WorldHandler extends JFrame implements KeyListener {
@@ -241,15 +222,17 @@ public class WorldHandler extends JFrame implements KeyListener {
 		});
 		timer.start();
 
-		Timer timer2 = new Timer(2000, new ActionListener() {
+		Timer timer2 = new Timer(1200, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				
-				
-				gold = gold + 1;
-				gold2 = gold2 + 1;
-
+				if (remoteGame == true) {
+					gold = gold + 1;
+					gold2 = gold2 + 1;
+				}else {
+					gold = gold +2;
+					gold2 = gold2 +2;
+				}
 				lp = basis1.getLp();
 				lp2 = basis2.getLp();
 				hp1.setText(lp + " " + (remoteGame ? (RMIClient.client != null ? "Client" : "Server") : ""));
@@ -280,16 +263,6 @@ public class WorldHandler extends JFrame implements KeyListener {
 
 	}
 
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-
-		public void actionPerformed(ActionEvent e) {
-
-		}
-	}
 
 	public void createKrieger(boolean firstPlayer) {
 		if (remoteGame && RMIClient.client != null) {

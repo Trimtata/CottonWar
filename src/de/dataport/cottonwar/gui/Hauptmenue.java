@@ -1,7 +1,6 @@
 package de.dataport.cottonwar.gui;
 
 import java.awt.EventQueue;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,12 +8,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import de.dataport.cottonwar.objekte.Spielfeld;
 import de.dataport.cottonwar.savegame.Main;
 
 public class Hauptmenue extends JFrame implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JButton schliessen = new JButton();
 	JButton info = new JButton();
 	JButton ende = new JButton();

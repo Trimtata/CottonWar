@@ -1,70 +1,20 @@
 package de.dataport.cottonwar.gui;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Graphics;
-import java.awt.Point;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JViewport;
-
-import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
-
-import de.dataport.cottonwar.objekte.Einheit;
 import de.dataport.cottonwar.objekte.Spielfeld;
 
-import javax.swing.JButton;
-
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.Timer;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-
-public class World extends JPanel implements ActionListener{
+public class World extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	public  JPanel panel;
-	
+
 	public World() {
 	}
 
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-
-		public void actionPerformed(ActionEvent e) {
-		}
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-	}
-
-	
-	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(Spielfeld.backgroundw,0, 0, 1200, 700, null);
-	}
-	
-	
-	public void create(){
-
+		g.drawImage(Spielfeld.backgroundw, 0, 0, 1200, 700, null);
 	}
 }

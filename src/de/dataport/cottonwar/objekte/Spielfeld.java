@@ -11,8 +11,6 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import de.dataport.cottonwar.gui.WorldHandler;
-
 public class Spielfeld extends JPanel {
 
 	public static Image background, backgroundh, backgroundw, Basis, Basis0, Krieger, Krieger0, Ritter, Ritter0, Reiter, Reiter0, Lord,
