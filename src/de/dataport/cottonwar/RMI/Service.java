@@ -28,7 +28,7 @@ public class Service implements ServiceInterface {
 	public void start() {
 
 		try {
-			Registry registry = LocateRegistry.createRegistry(1099);
+			Registry registry = LocateRegistry.createRegistry(80);
 
 			stub = (ServiceInterface) UnicastRemoteObject.exportObject(new Service(), 0);
 

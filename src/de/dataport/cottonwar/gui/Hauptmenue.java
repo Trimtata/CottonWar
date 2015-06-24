@@ -86,6 +86,7 @@ public class Hauptmenue extends JFrame implements ActionListener {
 
 		if (e.getSource() == einheiten) {
 			Object[] options = { "OK" };
+
 			JOptionPane
 					.showOptionDialog(
 							null,
@@ -102,6 +103,7 @@ public class Hauptmenue extends JFrame implements ActionListener {
 									+ " \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t-", "Information",
 							JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
+
 		}
 
 		if (e.getSource() == story) {
@@ -111,12 +113,15 @@ public class Hauptmenue extends JFrame implements ActionListener {
 							null,
 							"Nachdem ein riesiger Meteorit die Menschheit im Jahr 3056 vernichtete, \nwurde die Erde zu einem kalten und düsteren Ort. Nach etwa 4 Millionen Jahren der Einöde brachte das Wunder der Evolution erneut die Menschen hervor. \nDiese kämpften in der harschen Natur ums Überleben und schlossen sich zur besseren Verteidigung in Gruppen zusammen. \nZwei dieser Gruppen kämpften immer wieder um ihr Territorium, bis sich der Konflikt letztlich in einem 4 Jährigen Krieg zuspitzte, dem Cotton War. \n"
 									+ "Führen sie ihre Fraktion zum Sieg und beherrschen sie die Welt in diesem actiongeladenen Indie-Titel.",
+
 							"Story", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
 
 		}
 
 		if (e.getSource() == info) {
 			Object[] options = { "OK" };
+
 			JOptionPane.showOptionDialog(null, "\t \t \t \t \t \t \t \t\t \t \t \t \t \t \t \t \t \tSpieler 1 \t \t \t \t \tSpieler2 \n"
 					+ "Krieger: \tQ \t \t \t \t \t\t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \tI \n\n"
 					+ "Ritter: \t \t \t \t \tW \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \tO \n\n"
@@ -125,6 +130,7 @@ public class Hauptmenue extends JFrame implements ActionListener {
 					+ "Drache: \t \tS \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \tK \n\n"
 					+ "Himmels- \nwächter: \tD \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \t \tL", "Tastaturbelegungl",
 					JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
 
 		}
 
